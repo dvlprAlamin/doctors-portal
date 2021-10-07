@@ -1,24 +1,43 @@
-import logo from './logo.svg';
-import './App.css';
-
+import { BrowserRouter, Switch, Route } from 'react-router-dom';
+import Home from './pages/Home/Home';
+import { ThemeProvider } from '@emotion/react';
+import { theme } from './theme';
+import Navigation from './component/Navigation/Navigation';
+import AdminSidebar from './component/Dashboard/Sidebar/AdminSidebar';
+import Appointments from './component/Dashboard/Appointments/Appointments';
+import Patients from './component/Dashboard/Patients/Patients';
+import Prescriptions from './component/Dashboard/Prescriptions/Prescriptions';
+import Dashboard from './component/Dashboard/Dashboard/Dashboard';
+import Appointment from './component/Appointment/Appointment';
 function App() {
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <ThemeProvider theme={theme}>
+      <BrowserRouter>
+        {/* <Navigation /> */}
+        <Switch>
+          <Route exact path="/">
+            {/* <Home /> */}
+            <AdminSidebar />
+          </Route>
+          <Route exact path="/appointment">
+            <Appointment />
+          </Route>
+          <Route exact path="/dashboard">
+            <Dashboard />
+          </Route>
+          <Route exact path="/appointments">
+            <Appointments />
+          </Route>
+          <Route exact path="/patients">
+            <Patients />
+          </Route>
+          <Route exact path="/prescriptions">
+            <Prescriptions />
+          </Route>
+        </Switch>
+      </BrowserRouter>
+    </ThemeProvider>
   );
 }
 
