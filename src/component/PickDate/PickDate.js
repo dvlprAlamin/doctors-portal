@@ -3,6 +3,7 @@ import TextField from '@mui/material/TextField';
 import AdapterDateFns from '@mui/lab/AdapterDateFns';
 import LocalizationProvider from '@mui/lab/LocalizationProvider';
 import DatePicker from '@mui/lab/DatePicker';
+import MuiTextField from '../StyledComponent/MuiTextField';
 const PickDate = () => {
     const [value, setValue] = React.useState(new Date());
     return (
@@ -13,7 +14,7 @@ const PickDate = () => {
                 onChange={(newValue) => {
                     setValue(newValue);
                 }}
-                renderInput={(params) => <TextField style={{ maxWidth: 180, padding: 10 }} {...params} helperText={null} />}
+                renderInput={(params) => <MuiTextField style={{ maxWidth: 180, padding: 10 }} {...params} helperText={null} />}
             />
         </LocalizationProvider>
     );
