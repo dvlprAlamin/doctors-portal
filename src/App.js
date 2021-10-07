@@ -9,6 +9,7 @@ import Patients from './component/Dashboard/Patients/Patients';
 import Prescriptions from './component/Dashboard/Prescriptions/Prescriptions';
 import Dashboard from './component/Dashboard/Dashboard/Dashboard';
 import Appointment from './component/Appointment/Appointment';
+import Login from './component/Login/Login';
 function App() {
 
   return (
@@ -19,6 +20,10 @@ function App() {
           <Route exact path="/">
             {/* <Home /> */}
             <AdminSidebar />
+          </Route>
+
+          <Route exact path="/login">
+            <Login />
           </Route>
           <Route exact path="/appointment">
             <Appointment />

@@ -30,25 +30,25 @@ const Dashboard = () => {
 
                     <Typography style={{ marginBottom: 25 }} variant="h6">Dashboard</Typography>
                     <Grid container spacing={2} style={{ marginBottom: 20 }}>
-                        <Grid item sm={6} md={3} lg={3}>
+                        <Grid item xs={6} sm={6} md={3} lg={3}>
                             <Paper className={gridItem} style={{ background: '#F1536E' }}>
                                 <Typography variant="h3">09</Typography>
                                 <Typography variant="body1">Pending <br /> Appointment</Typography>
                             </Paper>
                         </Grid>
-                        <Grid item sm={6} md={3} lg={3}>
+                        <Grid item xs={6} sm={6} md={3} lg={3}>
                             <Paper className={gridItem} style={{ background: '#0FCFEC' }}>
                                 <Typography variant="h3">19</Typography>
                                 <Typography variant="body1">Today's <br /> Appointment</Typography>
                             </Paper>
                         </Grid>
-                        <Grid item sm={6} md={3} lg={3}>
+                        <Grid item xs={6} sm={6} md={3} lg={3}>
                             <Paper className={gridItem} style={{ background: '#19D3AE' }}>
                                 <Typography variant="h3">34</Typography>
                                 <Typography variant="body1">Total <br /> Appointment</Typography>
                             </Paper>
                         </Grid>
-                        <Grid item sm={6} md={3} lg={3}>
+                        <Grid item xs={6} sm={6} md={3} lg={3}>
                             <Paper className={gridItem} style={{ background: '#FDA006' }}>
                                 <Typography variant="h3">78</Typography>
                                 <Typography variant="body1">Total <br /> Patients</Typography>
