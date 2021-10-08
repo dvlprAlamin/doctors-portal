@@ -1,5 +1,5 @@
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
-import Home from './pages/Home/Home';
+import Home from './component/Home/Home/Home';
 import { ThemeProvider } from '@emotion/react';
 import { theme } from './theme';
 import Navigation from './component/Navigation/Navigation';
@@ -15,11 +15,9 @@ function App() {
   return (
     <ThemeProvider theme={theme}>
       <BrowserRouter>
-        {/* <Navigation /> */}
         <Switch>
           <Route exact path="/">
-            {/* <Home /> */}
-            <AdminSidebar />
+            <Home />
           </Route>
 
           <Route exact path="/login">

@@ -38,6 +38,7 @@ const Navigation = () => {
                     <Link to='/' className={navItem}>Reviews</Link>
                     <Link to='/' className={navItem}>Blog</Link>
                     <Link to='/' className={navItem}>Contact Us</Link>
+                    <Link to='/dashboard' className={navItem}>Dashboard</Link>
                 </nav>
             </div>
         </Container>

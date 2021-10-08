@@ -7,7 +7,6 @@ import AppointmentModal from './AppointmentModal';
 const Appointment = () => {
     const [date, setDate] = useState(new Date());
     const [open, setOpen] = useState(false);
-    const handleOpen = () => setOpen(true);
     return (
         <Container>
             <Grid container spacing={3} alignItems="center" height="90vh">
