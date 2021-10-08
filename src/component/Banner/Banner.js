@@ -1,6 +1,7 @@
 import { Container, Grid, Typography } from '@mui/material';
 import { makeStyles } from '@mui/styles';
 import React from 'react';
+import { Link } from 'react-router-dom';
 import MuiButton from '../StyledComponent/MuiButton';
 import bg from './../../images/bg.png'
 import chairImg from './../../images/chair.png'
@@ -38,7 +39,7 @@ const useStyle = makeStyles({
 const Banner = () => {
     const { banner, bannerContent } = useStyle()
     return (
-        <div className={banner}>
+        <div className={banner} id="home">
             <Container>
                 <Grid container className={bannerContent}>
                     <Grid item sm={12} lg={6}>
@@ -49,7 +50,7 @@ const Banner = () => {
                         <Typography variant="body1">
                             Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry’s standard dummy text ever since the
                         </Typography>
-                        <MuiButton>Get Appointment</MuiButton>
+                        <Link to='/appointment' style={{ textDecoration: 'none' }}><MuiButton>Get Appointment</MuiButton></Link>
                     </Grid>
                     <Grid item sm={12} lg={6}>
                         <img src={chairImg} alt="" />

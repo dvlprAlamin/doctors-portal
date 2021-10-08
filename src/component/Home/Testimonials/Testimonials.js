@@ -35,13 +35,13 @@ const Testimonials = () => {
     })
     const { root } = useStyle();
     return (
-        <section className={root}>
+        <section className={root} id="review">
             <Container>
                 <Typography variant="h5" color="primary" fontWeight={500}>TESTIMONIAL</Typography>
                 <Typography variant="h4" fontWeight={500} marginBottom={2}>What Our Patients <br /> Says</Typography>
                 <Grid container spacing={3}>
                     {
-                        testimonialsData.map(item => <TestimonialSingle item={item} />)
+                        testimonialsData.map((item, i) => <TestimonialSingle key={i} item={item} />)
                     }
                 </Grid>
             </Container>

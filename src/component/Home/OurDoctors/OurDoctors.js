@@ -26,7 +26,7 @@ const OurDoctors = () => {
             <Typography variant="h5" color="primary" textAlign="center" marginTop={8} fontWeight={500}>OUR DOCTORS</Typography>
             <Grid container spacing={3} marginTop={2}>
                 {
-                    doctorsData.map(item => <OurDoctorSIngle item={item} />)
+                    doctorsData.map((item, i) => <OurDoctorSIngle key={i} item={item} />)
                 }
             </Grid>
         </Container>

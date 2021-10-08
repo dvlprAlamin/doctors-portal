@@ -31,7 +31,7 @@ const InfoCard = () => {
             <Grid container spacing={2} style={{ marginTop: -100, marginBottom: 100 }}>
                 {
                     infoData.map(({ title, description, Icon, background }) =>
-                        <Grid item xs={12} md={4} lg={4}>
+                        <Grid item xs={12} md={4} lg={4} key={title}>
                             <Paper style={{ display: 'flex', padding: '20px 10px', background: background, justifyContent: 'space-around', alignItems: 'center' }}>
                                 <Icon style={{ fontSize: 60, color: '#fff' }} />
                                 <div >
