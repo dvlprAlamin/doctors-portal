@@ -2,7 +2,7 @@ import React from 'react';
 import fluoride from '../../../images/floride.png';
 import cavity from '../../../images/cavity.png';
 import whitening from '../../../images/whitening.png';
-import { Grid, Typography } from '@mui/material';
+import { Container, Grid, Typography } from '@mui/material';
 import ServiceSingle from '../ServiceSingle/ServiceSingle';
 
 
@@ -26,21 +26,21 @@ const serviceData = [
 const Services = () => {
 
     return (
-        <section>
-            <div style={{ marginBottom: "2.5em" }}>
-                <Typography variant="h4" component="h4" style={{ textAlign: 'center', marginBottom: "1.5rem" }}>
+        <Container style={{ marginBottom: 100 }}>
+            <div style={{ marginBottom: "2.5em", textAlign: 'center', }}>
+                <Typography variant="h5" color="primary" fontWeight="600">
                     Our Services
                 </Typography>
-                <Typography variant="h3" component="h3" style={{ textAlign: 'center' }}>
+                <Typography variant="h4" fontWeight="600">
                     Services We Provide
                 </Typography>
             </div>
             <Grid container spacing={{ xs: 2, md: 3 }} columns={{ xs: 4, sm: 8, md: 12 }} >
                 {
-                    serviceData.map(service => <ServiceSingle service={service} key={service.name}></ServiceSingle>)
+                    serviceData.map(service => <ServiceSingle service={service} key={service.name} />)
                 }
             </Grid>
-        </section>
+        </Container>
     );
 };
 
