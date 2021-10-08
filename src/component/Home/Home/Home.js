@@ -6,6 +6,9 @@ import Services from '../Services/Services';
 import Treatment from '../Treatment/Treatment';
 import AppointmentBanner from '../AppointmentBanner/AppointmentBanner';
 import Testimonials from '../Testimonials/Testimonials';
+import Blogs from '../Blogs/Blogs';
+import OurDoctors from '../OurDoctors/OurDoctors';
+import Contact from '../Contact/Contact';
 const Home = () => {
     return (
         <>
@@ -16,6 +19,9 @@ const Home = () => {
             <Treatment />
             <AppointmentBanner />
             <Testimonials />
+            <Blogs />
+            <OurDoctors />
+            <Contact />
         </>
     );
 };

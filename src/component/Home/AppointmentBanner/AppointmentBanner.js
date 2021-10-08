@@ -24,8 +24,8 @@ const AppointmentBanner = () => {
                         <img src={doctorImg} style={{ marginTop: -140 }} alt="" width="100%" />
                     </Grid>
                     <Grid item xs={12} sm={12} md={7} lg={7}>
-                        <Typography variant="h5" color="primary">APPOINTMENT</Typography>
-                        <Typography variant="h3" color="#fff">Make an Appointment Today</Typography>
+                        <Typography variant="h5" color="primary" fontWeight={500}>APPOINTMENT</Typography>
+                        <Typography variant="h4" color="#fff" fontWeight={500}>Make an Appointment Today</Typography>
                         <Typography variant="body1" style={{ margin: '10px 0', lineHeight: 2, color: "#fff" }}>
                             Lorem ipsum dolor, sit amet consectetur adipisicing elit. Atque magnam ad consequuntur assumenda saepe hic amet nemo ea facere a!
                         </Typography>

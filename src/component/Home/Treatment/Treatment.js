@@ -10,7 +10,7 @@ const Treatment = () => {
                     <img src={treatmentImg} alt="" width="100%" />
                 </Grid>
                 <Grid item xs={12} sm={12} md={7} lg={7}>
-                    <Typography variant="h3">Exponetional Dental Care, on your Term</Typography>
+                    <Typography variant="h4" fontWeight={500}>Exponetional Dental Care, on your Term</Typography>
                     <Typography variant="body1" style={{ margin: '20px 0', lineHeight: 2.2 }}>
                         Lorem ipsum dolor sit amet consectetur adipisicing elit. Tempore efacere amet aperiam non odio. Temporibus, nemo quasi quisquam ipsa distinctio saepe sed veniam incidunt, tempora mollitia, dignissimos repellendus expedita. Obcaecati minima, reiciendis optio aspernatur autem pariatur soluta illum velit, eligendi dolorem consequuntur sapiente rerum accusamus aut nulla praesentium! Neque autem animi, voluptatem magnam nesciunt officia nemo nam, delectus minima velit beatae iste praesentium ad repudiandae, similique excepturi sapiente.
                     </Typography>
