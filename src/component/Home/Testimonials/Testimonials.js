@@ -30,7 +30,7 @@ const Testimonials = () => {
             backgroundRepeat: 'no-repeat',
             backgroundPosition: '100% 0',
             backgroundSize: 150,
-            margin: '50px 0 80px 0'
+            padding: '100px 0'
         }
     })
     const { root } = useStyle();
@@ -39,7 +39,7 @@ const Testimonials = () => {
             <Container>
                 <Typography variant="h5" color="primary" fontWeight={500}>TESTIMONIAL</Typography>
                 <Typography variant="h4" fontWeight={500} marginBottom={2}>What Our Patients <br /> Says</Typography>
-                <Grid container spacing={3}>
+                <Grid container spacing={3} justifyContent="center">
                     {
                         testimonialsData.map((item, i) => <TestimonialSingle key={i} item={item} />)
                     }

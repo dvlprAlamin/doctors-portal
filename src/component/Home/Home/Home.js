@@ -9,6 +9,7 @@ import Testimonials from '../Testimonials/Testimonials';
 import Blogs from '../Blogs/Blogs';
 import OurDoctors from '../OurDoctors/OurDoctors';
 import Contact from '../Contact/Contact';
+import Footer from '../../Footer/Footer';
 const Home = () => {
     return (
         <>
@@ -22,6 +23,7 @@ const Home = () => {
             <Blogs />
             <OurDoctors />
             <Contact />
+            <Footer />
         </>
     );
 };

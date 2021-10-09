@@ -4,7 +4,7 @@ import treatmentImg from '../../../images/treatment.png'
 import MuiButton from './../../StyledComponent/MuiButton'
 const Treatment = () => {
     return (
-        <Container id="about">
+        <Container id="about" style={{ paddingTop: 50 }}>
             <Grid container spacing={3} alignItems="center">
                 <Grid item xs={12} sm={12} md={5} lg={5}>
                     <img src={treatmentImg} alt="" width="100%" />

@@ -26,15 +26,17 @@ const blogsData = [
 ]
 const Blogs = () => {
     return (
-        <Container id="blog">
-            <Typography variant="h5" color="primary" textAlign="center" fontWeight={500}>OUR BLOG</Typography>
-            <Typography variant="h4" fontWeight={500} textAlign="center" marginBottom={2}>From Our Blog News</Typography>
-            <Grid container spacing={3} marginTop={2}>
-                {
-                    blogsData.map((item, i) => <BlogSingle key={i} item={item} />)
-                }
-            </Grid>
-        </Container>
+        <section id="blog" style={{ padding: '100px 0' }}>
+            <Container>
+                <Typography variant="h5" color="primary" textAlign="center" fontWeight={500}>OUR BLOG</Typography>
+                <Typography variant="h4" fontWeight={500} textAlign="center" marginBottom={2}>From Our Blog News</Typography>
+                <Grid container spacing={3} marginTop={2} justifyContent="center">
+                    {
+                        blogsData.map((item, i) => <BlogSingle key={i} item={item} />)
+                    }
+                </Grid>
+            </Container>
+        </section>
     );
 };
 

@@ -4,7 +4,7 @@ import React from 'react';
 const ServiceSingle = ({ service }) => {
     const { img, name } = service;
     return (
-        <Grid item xs={12} md={4} >
+        <Grid item xs={12} sm={8} md={4} lg={4}>
             <Card variant="outlined">
                 <CardActionArea style={{ paddingTop: 20 }}>
                     <CardMedia

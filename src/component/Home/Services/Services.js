@@ -26,21 +26,23 @@ const serviceData = [
 const Services = () => {
 
     return (
-        <Container style={{ marginBottom: 100 }} id="services">
-            <div style={{ marginBottom: "2.5em", textAlign: 'center', }}>
-                <Typography variant="h5" color="primary" fontWeight="600">
-                    Our Services
-                </Typography>
-                <Typography variant="h4" fontWeight="600">
-                    Services We Provide
-                </Typography>
-            </div>
-            <Grid container spacing={{ xs: 2, md: 3 }} columns={{ xs: 4, sm: 8, md: 12 }} >
-                {
-                    serviceData.map((service, i) => <ServiceSingle service={service} key={i} />)
-                }
-            </Grid>
-        </Container>
+        <section style={{ padding: '100px 0' }} id="services">
+            <Container>
+                <div style={{ marginBottom: "2.5em", textAlign: 'center', }}>
+                    <Typography variant="h5" color="primary" fontWeight="500">
+                        Our Services
+                    </Typography>
+                    <Typography variant="h4" fontWeight="500">
+                        Services We Provide
+                    </Typography>
+                </div>
+                <Grid container spacing={3} justifyContent="center">
+                    {
+                        serviceData.map((service, i) => <ServiceSingle service={service} key={i} />)
+                    }
+                </Grid>
+            </Container>
+        </section>
     );
 };
 

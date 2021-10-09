@@ -4,7 +4,8 @@ import Calendar from '../Calendar/Calendar';
 import chairImg from './../../images/chair.png';
 import MuiButton from './../StyledComponent/MuiButton'
 import AppointmentModal from './AppointmentModal';
-import Navigation from '../Navigation/Navigation'
+import Navigation from '../Navigation/Navigation';
+import Footer from '../Footer/Footer'
 const Appointment = () => {
     const [date, setDate] = useState(new Date());
     const [open, setOpen] = useState(false);
@@ -73,6 +74,7 @@ const Appointment = () => {
                 </Grid>
                 <AppointmentModal open={open} setOpen={setOpen} />
             </Container>
+            <Footer />
         </>
     );
 };

@@ -4,7 +4,7 @@ import { Avatar, Card, CardActionArea, CardContent, Grid, Typography } from '@mu
 const BlogSingle = ({ item }) => {
     const { name, date, img, title } = item;
     return (
-        <Grid item xs={12} sm={12} md={4} lg={4}>
+        <Grid item xs={12} sm={8} md={4} lg={4}>
             <Card variant="outlined">
                 <CardActionArea>
                     <CardContent>

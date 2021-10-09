@@ -1,4 +1,4 @@
-import { Grid, TextField, Typography } from '@mui/material';
+import { Grid, Typography } from '@mui/material';
 import React from 'react';
 import { makeStyles } from '@mui/styles';
 import bg from '../../../images/bg.png'
@@ -8,7 +8,7 @@ const Contact = () => {
     const useStyle = makeStyles({
         root: {
             marginTop: 100,
-            padding: 20,
+            padding: '100px 20px',
             background: `url(${bg}),
         linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.8))`,
             backgroundBlendMode: 'overlay',
@@ -16,31 +16,29 @@ const Contact = () => {
             backgroundSize: 'cover'
         },
         textField: {
-            '& .MuiTextField-root': {
-                color: '#fff !important'
-            }
+            background: '#fff !important',
+            borderRadius: 3,
         },
         textArea: {
             width: '100%',
-            background: 'transparent',
+            background: '#fff',
             borderRadius: 3,
             fontFamily: 'inherit',
             fontSize: 17,
             padding: 13,
             border: '1px solid #fff',
-            color: '#fff',
             margin: '15px 0',
             '&::placeholder': {
-                color: '#fff',
+                color: '#a2a2a2',
             },
             '&:hover': {
                 borderColor: '#19D3AE'
             },
             '&:focus': {
                 outline: '#19D3AE',
+                padding: 12,
                 border: '2px solid',
                 borderColor: '#19D3AE',
-                color: '#fff',
             },
         }
     })
@@ -53,9 +51,10 @@ const Contact = () => {
                 <Grid container justifyContent="center">
                     <Grid item xs={12} sm={12} md={8} lg={8}>
                         <MuiTextField
+                            className={textField}
                             variant="outlined"
                             color="primary"
-                            label="Email Address"
+                            placeholder="Email Address"
                             required
                             fullWidth
                             margin="normal"
@@ -64,7 +63,7 @@ const Contact = () => {
                     <Grid item xs={12} sm={12} md={8} lg={8}>
                         <MuiTextField
                             variant="outlined"
-                            label="Subject"
+                            placeholder="Subject"
                             required
                             fullWidth
                             margin="normal"

@@ -5,7 +5,7 @@ import Modal from '@mui/material/Modal';
 import Fade from '@mui/material/Fade';
 import { Grid, MenuItem } from '@mui/material';
 import MuiButton from '../StyledComponent/MuiButton';
-import ModalTextField from '../StyledComponent/ModalTextField';
+import MuiTextField from '../StyledComponent/MuiTextField';
 
 const style = {
     position: 'absolute',
@@ -38,19 +38,19 @@ const AppointmentModal = ({ open, setOpen }) => {
         >
             <Fade in={open}>
                 <Box sx={style}>
-                    <ModalTextField
+                    <MuiTextField
                         variant="outlined"
                         fullWidth
                         label="Name"
                         margin="dense"
                     />
-                    <ModalTextField
+                    <MuiTextField
                         margin="dense"
                         variant="outlined"
                         fullWidth
                         label="Phone Number"
                     />
-                    <ModalTextField
+                    <MuiTextField
                         variant="outlined"
                         fullWidth
                         label="Email"
@@ -58,7 +58,7 @@ const AppointmentModal = ({ open, setOpen }) => {
                     />
                     <Grid container spacing={2}>
                         <Grid item xs={12} sm={6}>
-                            <ModalTextField
+                            <MuiTextField
                                 select
                                 variant="outlined"
                                 fullWidth
@@ -67,10 +67,10 @@ const AppointmentModal = ({ open, setOpen }) => {
                                 <MenuItem value="default" disabled>Gender</MenuItem>
                                 <MenuItem value="male">Male</MenuItem>
                                 <MenuItem value="female">Female</MenuItem>
-                            </ModalTextField>
+                            </MuiTextField>
                         </Grid>
                         <Grid item xs={12} sm={6}>
-                            <ModalTextField
+                            <MuiTextField
                                 variant="outlined"
                                 fullWidth
                                 label="Age"

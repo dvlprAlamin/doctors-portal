@@ -11,17 +11,40 @@ const AppointmentBanner = () => {
         linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7))`,
             backgroundBlendMode: 'overlay',
             backgroundRepeat: 'no-repeat',
-            maxHeight: 350,
-            marginTop: 150
+            // minHeight: 350,
+            marginTop: 100,
+            // '@media(max-width:900px)': {
+            //     padding: '50px 0',
+            // }
+        },
+        doctor: {
+            // position: 'absolute',
+            // bottom: 0,
+            // width: '90%',
+            '@media(max-width:900px)': {
+                maxHeight: 450,
+                width: 'auto',
+                // left: 0,
+                // right: 0,
+                // margin: '0 auto'
+            },
+            width: '100%',
+            marginTop: -100
+
+        },
+        imgContainer: {
+            display: 'flex',
+            justifyContent: 'center',
+            alignItems: 'flex-end'
         }
     })
-    const { root } = useStyle();
+    const { root, doctor, imgContainer } = useStyle();
     return (
         <section className={root}>
             <Container>
                 <Grid container spacing={3} alignItems="center">
-                    <Grid item xs={12} sm={12} md={5} lg={5}>
-                        <img src={doctorImg} style={{ marginTop: -140 }} alt="" width="100%" />
+                    <Grid item xs={12} sm={12} md={5} lg={5} className={imgContainer}>
+                        <img src={doctorImg} className={doctor} alt="" />
                     </Grid>
                     <Grid item xs={12} sm={12} md={7} lg={7}>
                         <Typography variant="h5" color="primary" fontWeight={500}>APPOINTMENT</Typography>
@@ -29,7 +52,7 @@ const AppointmentBanner = () => {
                         <Typography variant="body1" style={{ margin: '10px 0', lineHeight: 2, color: "#fff" }}>
                             Lorem ipsum dolor, sit amet consectetur adipisicing elit. Atque magnam ad consequuntur assumenda saepe hic amet nemo ea facere a!
                         </Typography>
-                        <MuiButton>Learn More</MuiButton>
+                        <MuiButton style={{ marginBottom: 20 }}>Learn More</MuiButton>
                     </Grid>
                 </Grid>
             </Container>

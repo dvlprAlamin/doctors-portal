@@ -12,6 +12,27 @@ const useStyle = makeStyles({
         backgroundRepeat: 'no-repeat',
         backgroundSize: 'cover',
         height: '90vh',
+        minHeight: 500,
+        position: 'relative',
+        '&:before': {
+            content: '""',
+            height: '100%',
+            width: '33%',
+            background: '#3A4256',
+            position: 'absolute',
+            top: 0,
+            right: 0,
+            zIndex: -1,
+            '@media(max-width:900px)': {
+                display: 'none'
+            }
+        }
+    },
+    bannerImg: {
+        width: '100%',
+        '@media(max-width:900px)': {
+            display: 'none'
+        }
     },
     bannerContent: {
         alignItems: 'center',
@@ -37,12 +58,12 @@ const useStyle = makeStyles({
 })
 
 const Banner = () => {
-    const { banner, bannerContent } = useStyle()
+    const { banner, bannerContent, bannerImg } = useStyle()
     return (
         <div className={banner} id="home">
             <Container>
                 <Grid container className={bannerContent}>
-                    <Grid item sm={12} lg={6}>
+                    <Grid item xs={12} sm={12} md={6} lg={6} order={{ xs: 2, sm: 2, md: 1 }}>
                         <Typography variant="h3">
                             Your New Smile <br />
                             Starts Here
@@ -52,8 +73,8 @@ const Banner = () => {
                         </Typography>
                         <Link to='/appointment' style={{ textDecoration: 'none' }}><MuiButton>Get Appointment</MuiButton></Link>
                     </Grid>
-                    <Grid item sm={12} lg={6}>
-                        <img src={chairImg} alt="" />
+                    <Grid item md={6} lg={6} order={{ xs: 1, sm: 1, md: 2 }}>
+                        <img src={chairImg} className={bannerImg} alt="" />
                     </Grid>
                 </Grid>
             </Container>
