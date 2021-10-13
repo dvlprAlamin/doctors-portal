@@ -10,6 +10,7 @@ import Prescriptions from './component/Dashboard/Prescriptions/Prescriptions';
 import Dashboard from './component/Dashboard/Dashboard/Dashboard';
 import Appointment from './component/Appointment/Appointment';
 import Login from './component/Login/Login';
+import PrivateRoute from './component/PrivateRoute/PrivateRoute';
 function App() {
 
   return (
@@ -26,18 +27,19 @@ function App() {
           <Route exact path="/appointment">
             <Appointment />
           </Route>
-          <Route exact path="/dashboard">
+          <PrivateRoute exact path="/dashboard">
             <Dashboard />
-          </Route>
-          <Route exact path="/appointments">
+          </PrivateRoute>
+          <PrivateRoute exact path="/appointments">
             <Appointments />
-          </Route>
-          <Route exact path="/patients">
+          </PrivateRoute>
+          {/* <PrivateRoute exact path="/appointments" component={Appointments} /> */}
+          <PrivateRoute exact path="/patients">
             <Patients />
-          </Route>
-          <Route exact path="/prescriptions">
+          </PrivateRoute>
+          <PrivateRoute exact path="/prescriptions">
             <Prescriptions />
-          </Route>
+          </PrivateRoute>
         </Switch>
       </BrowserRouter>
     </ThemeProvider>

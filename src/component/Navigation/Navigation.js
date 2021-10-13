@@ -9,9 +9,10 @@ import Toolbar from '@mui/material/Toolbar';
 import { makeStyles } from '@mui/styles';
 import { useEffect, useState } from 'react';
 import { Link } from "react-router-dom";
-import { Button, Container } from '@mui/material';
+import { Button, Container, Typography } from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
 import { animateScroll as scroll, Link as ScrollLink } from 'react-scroll';
+import { ArrowUpward } from '@mui/icons-material';
 
 
 const scrollNavItems = [
@@ -93,6 +94,7 @@ const Navigation = () => {
         },
         navbar: {
             display: 'flex',
+            justifyContent: 'space-between',
             alignItems: 'center',
             transition: '.3s linear',
             padding: `${scrollNav ? '10px 0' : '20px 0'}`,
@@ -144,6 +146,13 @@ const Navigation = () => {
             '&:hover': {
                 borderColor: '#fff',
             },
+        },
+        backToTop: {
+            position: 'fixed !important',
+            bottom: 30,
+            right: 20,
+            background: '#19D3AE !important',
+            color: '#fff !important',
         }
     });
     const {
@@ -155,10 +164,12 @@ const Navigation = () => {
         navItem,
         link,
         navItemDrawer,
-        navbarMain } = useStyles();
+        navbarMain,
+        backToTop } = useStyles();
     const drawer = (
         <div style={{ textAlign: 'center' }}>
-            {/* <img src={logoBlack} onClick={toggleHome} style={{ maxWidth: '90%', margin: '20px auto' }} alt="Logo" /> */}
+            <Typography variant="h5" color="#fff" onClick={toggleHome} padding="20px 0">Doctors Portal</Typography>
+            <Divider />
             {
                 scrollNavItems.map(({ label, path }) =>
                     <ScrollLink key={label} className={link} to={path}
@@ -189,9 +200,14 @@ const Navigation = () => {
     return (
         <div className={root}>
 
-
             <nav className={navbarMain}>
-
+                {/* Back to top Button */}
+                {
+                    scrollNav &&
+                    <IconButton onClick={toggleHome} className={backToTop}>
+                        <ArrowUpward />
+                    </IconButton>
+                }
                 <AppBar
                     className={appBar}>
                     <Toolbar>
@@ -221,33 +237,34 @@ const Navigation = () => {
                         {drawer}
                     </Drawer>
                 </Hidden>
-                <Container className={navbar}>
-                    {/* <img src={logo} onClick={toggleHome} style={{ maxWidth: 250, flex: 1, cursor: 'pointer' }} alt="Logo" /> */}
-                    <div style={{ flex: 3, textAlign: 'right' }}>
-                        <span>
-                            {
-                                scrollNavItems.map(({ label, path }) =>
-                                    <ScrollLink key={label} className={link} to={path}
-                                        spy={true}
-                                        smooth={true}
-                                        exact='true'
-                                        offset={-15}
-                                        duration={500}>
-                                        <Button>
-                                            <Link to='/' className={navItem}>{label}</Link>
-                                        </Button>
-                                    </ScrollLink>)
-                            }
-                            <Link className={link} to='/dashboard'>
-                                <Button>
-                                    <span className={navItem}>Dashboard</span>
-                                </Button>
-                            </Link>
-                        </span>
+                <Container>
+                    <div className={navbar}>
+                        <Typography variant="h5" color="#fff" onClick={toggleHome}>Doctors Portal</Typography>
+                        <div >
+                            <span>
+                                {
+                                    scrollNavItems.map(({ label, path }) =>
+                                        <ScrollLink key={label} className={link} to={path}
+                                            spy={true}
+                                            smooth={true}
+                                            exact='true'
+                                            offset={-15}
+                                            duration={500}>
+                                            <Button>
+                                                <Link to='/' className={navItem}>{label}</Link>
+                                            </Button>
+                                        </ScrollLink>)
+                                }
+                                <Link className={link} to='/dashboard'>
+                                    <Button>
+                                        <span className={navItem}>Dashboard</span>
+                                    </Button>
+                                </Link>
+                            </span>
+                        </div>
                     </div>
                 </Container>
             </nav>
-
         </div>
     );
 }

@@ -72,7 +72,7 @@ const Appointment = () => {
                         </Paper>
                     </Grid>
                 </Grid>
-                <AppointmentModal open={open} setOpen={setOpen} />
+                <AppointmentModal open={open} setOpen={setOpen} date={date} />
             </Container>
             <Footer />
         </>

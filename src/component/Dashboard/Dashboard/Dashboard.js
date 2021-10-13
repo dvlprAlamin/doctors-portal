@@ -1,34 +1,67 @@
-import { Container, Paper, Typography, Table, TableBody, TableCell, TableHead, TableRow, TableContainer, Grid, Button, IconButton } from '@mui/material';
-import React from 'react';
+import { Container, Paper, Typography, Table, MenuItem, TableBody, TableCell, TableHead, TableRow, TableContainer, Grid, Button, IconButton } from '@mui/material';
+import React, { useState, useEffect } from 'react';
 import PickDate from '../../PickDate/PickDate';
 import DashboardDiv from '../../StyledComponent/DashboardDiv';
 import MuiButton from '../../StyledComponent/MuiButton';
 import AdminSidebar from '../Sidebar/AdminSidebar';
 import EditIcon from '@mui/icons-material/Edit';
 import { makeStyles } from '@mui/styles';
-const Dashboard = () => {
-    const useStyle = makeStyles({
-        gridItem: {
-            display: 'flex',
-            justifyContent: 'space-around',
-            padding: 10,
-            '& h3': {
-                fontWeight: 700,
-                color: '#fff'
-            },
-            '& p': {
-                color: '#fff'
-            }
+import UserAvatar from '../Sidebar/UserAvatar';
+import axios from 'axios';
+import { useMyContext } from '../../../context/context';
+import MuiCheckbox from '../../StyledComponent/MuiCheckbox';
+import { Delete } from '@mui/icons-material';
+import AppointmentSingle from './AppointmentSingle';
+const useStyle = makeStyles({
+    gridItem: {
+        display: 'flex',
+        justifyContent: 'space-around',
+        padding: 10,
+        '& h3': {
+            fontWeight: 700,
+            color: '#fff'
+        },
+        '& p': {
+            color: '#fff'
         }
-    });
+    }
+});
+
+
+const Dashboard = () => {
     const { gridItem } = useStyle();
+    const { date, loggedInUser } = useMyContext();
+    // console.log(date);
+    const [appointments, setAppointments] = useState([]);
+    console.log(appointments);
+
+    useEffect(() => {
+        const dataObject = { date: new Date(date).toDateString(), email: loggedInUser.email }
+        console.log(dataObject);
+        axios.post('https://secret-plains-52601.herokuapp.com/appointmentsByDate', dataObject)
+            .then(res => {
+                setAppointments(res.data);
+            })
+    }, [date, loggedInUser])
+
+    useEffect(() => {
+        axios.get('https://secret-plains-52601.herokuapp.com/appointments')
+            .then(res => {
+                setAppointments(res.data);
+            })
+    }, [])
+
+
     return (
         <>
             <AdminSidebar />
             <DashboardDiv>
                 <Container>
 
-                    <Typography style={{ marginBottom: 25 }} variant="h6">Dashboard</Typography>
+                    <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                        <Typography style={{ marginBottom: 25 }} variant="h6">Dashboard</Typography>
+                        <UserAvatar />
+                    </div>
                     <Grid container spacing={2} style={{ marginBottom: 20 }}>
                         <Grid item xs={6} sm={6} md={3} lg={3}>
                             <Paper className={gridItem} style={{ background: '#F1536E' }}>
@@ -75,7 +108,10 @@ const Dashboard = () => {
                                     </TableRow>
                                 </TableHead>
                                 <TableBody>
-                                    <TableRow>
+                                    {
+                                        appointments.map(item => <AppointmentSingle item={item} />)
+                                    }
+                                    {/* <TableRow>
                                         <TableCell>01</TableCell>
                                         <TableCell>05-05-21</TableCell>
                                         <TableCell>6.00 PM</TableCell>
@@ -87,33 +123,7 @@ const Dashboard = () => {
                                         <TableCell>
                                             <Button>Pending</Button><IconButton><EditIcon /> </IconButton>
                                         </TableCell>
-                                    </TableRow>
-                                    <TableRow>
-                                        <TableCell>01</TableCell>
-                                        <TableCell>05-05-21</TableCell>
-                                        <TableCell>6.00 PM</TableCell>
-                                        <TableCell>Karim Ahmed</TableCell>
-                                        <TableCell>0123456789</TableCell>
-                                        <TableCell>
-                                            <MuiButton>View</MuiButton>
-                                        </TableCell>
-                                        <TableCell>
-                                            <Button>Pending</Button><IconButton><EditIcon /> </IconButton>
-                                        </TableCell>
-                                    </TableRow>
-                                    <TableRow>
-                                        <TableCell>01</TableCell>
-                                        <TableCell>05-05-21</TableCell>
-                                        <TableCell>6.00 PM</TableCell>
-                                        <TableCell>Karim Ahmed</TableCell>
-                                        <TableCell>0123456789</TableCell>
-                                        <TableCell>
-                                            <MuiButton>View</MuiButton>
-                                        </TableCell>
-                                        <TableCell>
-                                            <Button>Pending</Button><IconButton><EditIcon /> </IconButton>
-                                        </TableCell>
-                                    </TableRow>
+                                    </TableRow> */}
                                 </TableBody>
                             </Table>
                         </TableContainer>

@@ -1,15 +1,15 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import AdapterDateFns from '@mui/lab/AdapterDateFns';
 import LocalizationProvider from '@mui/lab/LocalizationProvider';
 import { Container, Grid, MenuItem, Paper, Table, TableBody, TableHead, TableRow, Typography } from '@mui/material';
 import AdminSidebar from '../Sidebar/AdminSidebar';
 import { CalendarPicker } from '@mui/lab';
 import MuiCheckbox from '../../StyledComponent/MuiCheckbox';
-import { makeStyles } from '@mui/styles';
 import DashboardDiv from '../../StyledComponent/DashboardDiv';
 import TableData from '../../StyledComponent/TableData';
 import Calendar from '../../Calendar/Calendar';
-import { setDate } from 'date-fns';
+import axios from 'axios';
+import AppointmentsSingle from './AppointmentsSingle';
 
 // const StaticDatePickerLandscape = () => {
 //     const [date, setDate] = React.useState(new Date());
@@ -33,12 +33,16 @@ const Appointment = () => {
     //     }
     // })
     // const { root, gridItem } = useStyle();
-    const [date, setDate] = React.useState(new Date());
-    const [status, setStatus] = useState(false)
 
-    const handleChange = (event) => {
-        setStatus(event.target.value);
-    };
+    const [date, setDate] = useState(new Date());
+    const [appointments, setAppointments] = useState([]);
+    console.log(appointments);
+    useEffect(() => {
+        axios.get('http://localhost:5000/approvedAppointments')
+            .then(res => {
+                setAppointments(res.data)
+            })
+    }, [])
     return (
         <>
             <AdminSidebar />
@@ -61,48 +65,9 @@ const Appointment = () => {
                                         </TableRow>
                                     </TableHead>
                                     <TableBody>
-                                        <TableRow>
-                                            <TableData>Karim Ahmed</TableData>
-                                            <TableData>7.00 PM</TableData>
-                                            <TableData>
-                                                <MuiCheckbox
-                                                    select
-                                                    onChange={handleChange}
-                                                    value={status}
-                                                >
-                                                    <MenuItem value={false}>Not Visited</MenuItem>
-                                                    <MenuItem value={true}>Visited</MenuItem>
-                                                </MuiCheckbox>
-                                            </TableData>
-                                        </TableRow>
-                                        <TableRow>
-                                            <TableData>Karim Ahmed</TableData>
-                                            <TableData>7.00 PM</TableData>
-                                            <TableData>
-                                                <MuiCheckbox
-                                                    select
-                                                    onChange={handleChange}
-                                                    value={status}
-                                                >
-                                                    <MenuItem value={false}>Not Visited</MenuItem>
-                                                    <MenuItem value={true}>Visited</MenuItem>
-                                                </MuiCheckbox>
-                                            </TableData>
-                                        </TableRow>
-                                        <TableRow>
-                                            <TableData>Karim Ahmed</TableData>
-                                            <TableData>7.00 PM</TableData>
-                                            <TableData>
-                                                <MuiCheckbox
-                                                    select
-                                                    onChange={handleChange}
-                                                    value={status}
-                                                >
-                                                    <MenuItem value={false}>Not Visited</MenuItem>
-                                                    <MenuItem value={true}>Visited</MenuItem>
-                                                </MuiCheckbox>
-                                            </TableData>
-                                        </TableRow>
+                                        {
+                                            appointments.map(item => <AppointmentsSingle item={item} />)
+                                        }
                                     </TableBody>
                                 </Table>
                             </Paper>
