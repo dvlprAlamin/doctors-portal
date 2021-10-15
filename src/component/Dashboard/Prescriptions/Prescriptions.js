@@ -10,15 +10,25 @@ import AdminSidebar from '../Sidebar/AdminSidebar';
 import PrescriptionSingle from './PrescriptionSingle';
 
 const Prescriptions = () => {
-    const [patients, setPatients] = useState([]);
+    const [prescription, setPrescription] = useState([]);
     const [loading, setLoading] = useState(true);
     useEffect(() => {
         axios.get('http://localhost:5000/approvedAppointments')
             .then(res => {
-                setPatients(res.data)
+                setPrescription(res.data)
+                setPrescriptionByDate(res.data)
                 setLoading(false)
             })
     }, [])
+    const [prescriptionByDate, setPrescriptionByDate] = useState([])
+    const prescriptionByDateHandler = date => {
+        const dataObject = { date: new Date(date).toDateString() }
+        console.log(dataObject);
+        axios.post('http://localhost:5000/appointmentsByDate', dataObject)
+            .then(res => {
+                setPrescriptionByDate(res.data);
+            })
+    }
     return (
         <>
             <AdminSidebar />
@@ -28,7 +38,7 @@ const Prescriptions = () => {
                     <Paper variant="outlined">
                         <div style={{ display: 'flex', justifyContent: 'space-between' }}>
                             <Typography style={{ margin: 15 }} color="primary" variant="body1">All Prescriptions</Typography>
-                            <PickDate />
+                            <PickDate handler={prescriptionByDateHandler} />
                         </div>
                         <TableContainer>
                             <Table>
@@ -46,7 +56,7 @@ const Prescriptions = () => {
                                         <Loader /> :
                                         <TableBody>
                                             {
-                                                patients.map((patient, i) => <PrescriptionSingle index={i + 1} key={patient._id} patient={patient} />)
+                                                prescriptionByDate.map((patient, i) => <PrescriptionSingle index={i + 1} key={patient._id} patient={patient} />)
                                             }
 
                                         </TableBody>}

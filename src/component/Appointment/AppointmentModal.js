@@ -3,7 +3,7 @@ import Backdrop from '@mui/material/Backdrop';
 import Box from '@mui/material/Box';
 import Modal from '@mui/material/Modal';
 import Fade from '@mui/material/Fade';
-import { Grid, MenuItem } from '@mui/material';
+import { Grid, LinearProgress, MenuItem } from '@mui/material';
 import MuiButton from '../StyledComponent/MuiButton';
 import MuiTextField from '../StyledComponent/MuiTextField';
 import axios from 'axios';
@@ -25,6 +25,7 @@ const style = {
 const AppointmentModal = ({ open, setOpen, date }) => {
     const [gender, setGender] = useState('none');
     const [formData, setFormData] = useState({});
+    const [loading, setLoading] = useState(false)
     const handleChange = e => {
         const newData = {
             ...formData,
@@ -38,12 +39,15 @@ const AppointmentModal = ({ open, setOpen, date }) => {
         setFormData(newData);
     }
     const handleSubmit = e => {
+        setLoading(true)
         e.preventDefault();
         console.log(formData);
         axios.post('https://secret-plains-52601.herokuapp.com/addAppointment', formData)
             .then(res => {
-                console.log(res.data);
-                res.data && setOpen(false)
+                if (res.data) {
+                    setOpen(false)
+                    setLoading(false);
+                }
             })
     }
 
@@ -61,6 +65,7 @@ const AppointmentModal = ({ open, setOpen, date }) => {
         >
             <Fade in={open}>
                 <Box sx={style}>
+                    {loading && <LinearProgress />}
                     <form onSubmit={handleSubmit}>
                         <MuiTextField
                             variant="outlined"

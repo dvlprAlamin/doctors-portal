@@ -34,16 +34,17 @@ const AppointmentSingle = ({ index, appointment }) => {
             </TableCell>
             <TableCell>
                 <MuiCheckbox
+                    style={{ background: statusValue === 'pending' ? '#feb001' : statusValue === 'canceled' ? 'red' : '' }}
                     select
                     onChange={(e) => handleStatusChange(_id, e.target.value)}
                     value={statusValue}
                 >
+                    <MenuItem value="canceled">Canceled</MenuItem>
                     <MenuItem value="pending">Pending</MenuItem>
                     <MenuItem value="approved">Approved</MenuItem>
-                    <MenuItem value="canceled">Canceled</MenuItem>
                 </MuiCheckbox>
                 <IconButton onClick={() => deleteAppointmentHandler(_id)}>
-                    <Delete />
+                    <Delete htmlColor="red" />
                 </IconButton>
             </TableCell>
         </TableRow>

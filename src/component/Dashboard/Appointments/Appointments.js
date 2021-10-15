@@ -38,14 +38,26 @@ const Appointment = () => {
     const [date, setDate] = useState(new Date());
     const [appointments, setAppointments] = useState([]);
     const [loading, setLoading] = useState(true)
-    console.log(appointments);
+    // console.log(appointments);
     useEffect(() => {
         axios.get('http://localhost:5000/approvedAppointments')
             .then(res => {
-                setAppointments(res.data)
+                setAppointments(res.data);
+                setAppointmentsByDate(res.data)
                 setLoading(false)
             })
     }, [])
+
+    const [appointmentsByDate, setAppointmentsByDate] = useState([])
+    console.log(appointmentsByDate);
+    const appointmentsByDateHandler = date => {
+        const dataObject = { date: new Date(date).toDateString() }
+        console.log(dataObject);
+        axios.post('http://localhost:5000/appointmentsByDate', dataObject)
+            .then(res => {
+                setAppointmentsByDate(res.data);
+            })
+    }
     return (
         <>
             <AdminSidebar />
@@ -54,7 +66,7 @@ const Appointment = () => {
                     <Typography variant="h6">Appointment</Typography>
                     <Grid container spacing={3}>
                         <Grid item sm={12} md={6} lg={6} style={{ marginTop: 80 }}>
-                            <Calendar date={date} setDate={setDate} />
+                            <Calendar date={date} setDate={setDate} handler={appointmentsByDateHandler} />
                         </Grid>
                         <Grid item sm={12} md={6} lg={6}>
                             <Paper variant="outlined" style={{ minHeight: 450, marginTop: 20 }}>
@@ -72,7 +84,7 @@ const Appointment = () => {
                                             <Loader /> :
                                             <TableBody>
                                                 {
-                                                    appointments.map(appointment => <AppointmentsSingle appointment={appointment} />)
+                                                    appointmentsByDate.map(appointment => <AppointmentsSingle appointment={appointment} />)
                                                 }
                                             </TableBody>
                                     }

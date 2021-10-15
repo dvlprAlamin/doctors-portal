@@ -13,10 +13,21 @@ const Patients = () => {
     useEffect(() => {
         axios.get('http://localhost:5000/approvedAppointments')
             .then(res => {
-                setPatients(res.data)
+                setPatients(res.data);
+                setPatientByDate(res.data)
                 setLoading(false)
             })
     }, [])
+    const [patientByDate, setPatientByDate] = useState([])
+
+    const patientByDateHandler = date => {
+        const dataObject = { date: new Date(date).toDateString() }
+        console.log(dataObject);
+        axios.post('http://localhost:5000/appointmentsByDate', dataObject)
+            .then(res => {
+                setPatientByDate(res.data);
+            })
+    }
     return (
         <>
             <AdminSidebar />
@@ -27,7 +38,7 @@ const Patients = () => {
                     <Paper variant="outlined">
                         <div style={{ display: 'flex', justifyContent: 'space-between' }}>
                             <Typography style={{ margin: 15 }} color="primary" variant="body1">All Patients</Typography>
-                            <PickDate />
+                            <PickDate handler={patientByDateHandler} />
                         </div>
                         <TableContainer>
                             <Table>
@@ -45,7 +56,7 @@ const Patients = () => {
                                         <Loader /> :
                                         <TableBody>
                                             {
-                                                patients.map((patient, i) => <PatientSingle key={patient._id} index={i + 1} patient={patient} />)
+                                                patientByDate.map((patient, i) => <PatientSingle key={patient._id} index={i + 1} patient={patient} />)
                                             }
                                         </TableBody>}
                             </Table>

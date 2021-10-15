@@ -31,30 +31,31 @@ const useStyle = makeStyles({
 
 const Dashboard = () => {
     const { gridItem } = useStyle();
-    const { date, loggedInUser } = useMyContext();
+    const { loggedInUser } = useMyContext();
     // console.log(date);
     const [loading, setLoading] = useState(true)
     const [appointments, setAppointments] = useState([]);
-    console.log(appointments);
-    const appointByDateHandler = () => {
-        const dataObject = { date: new Date(date).toDateString(), email: loggedInUser.email }
-        console.log(dataObject);
-        axios.post('https://secret-plains-52601.herokuapp.com/appointmentsByDate', dataObject)
-            .then(res => {
-                setAppointments(res.data);
-            })
-    }
-    // useEffect(() => {
-
-    // }, [date, loggedInUser])
+    const [appointmentsByDate, setAppointmentsByDate] = useState([]);
 
     useEffect(() => {
         axios.get('https://secret-plains-52601.herokuapp.com/appointments')
             .then(res => {
                 setAppointments(res.data);
+                setAppointmentsByDate(res.data)
                 setLoading(false)
             })
     }, [])
+
+    // console.log(appointments);
+    const appointByDateHandler = (date) => {
+        const dataObject = { date: new Date(date).toDateString(), email: loggedInUser.email }
+        console.log(dataObject);
+        axios.post('https://secret-plains-52601.herokuapp.com/appointmentsByDate', dataObject)
+            .then(res => {
+                setAppointmentsByDate(res.data);
+            })
+    }
+
 
 
     return (
@@ -82,7 +83,7 @@ const Dashboard = () => {
                         </Grid>
                         <Grid item xs={6} sm={6} md={3} lg={3}>
                             <Paper className={gridItem} style={{ background: '#19D3AE' }}>
-                                <Typography variant="h3">{appointments.length}</Typography>
+                                <Typography variant="h3">86</Typography>
                                 <Typography variant="body1">Total <br /> Appointment</Typography>
                             </Paper>
                         </Grid>
@@ -97,7 +98,7 @@ const Dashboard = () => {
                     <Paper variant="outlined">
                         <div style={{ display: 'flex', justifyContent: 'space-between' }}>
                             <Typography style={{ margin: 15 }} color="primary" variant="body1">Recent Appointments</Typography>
-                            <PickDate appointByDateHandler={appointByDateHandler} />
+                            <PickDate handler={appointByDateHandler} />
                         </div>
                         <TableContainer>
                             <Table>
@@ -117,7 +118,7 @@ const Dashboard = () => {
                                         <Loader /> :
                                         <TableBody>
                                             {
-                                                appointments.map((appointment, i) => <AppointmentSingle key={appointment._id} index={i + 1} appointment={appointment} />)
+                                                appointmentsByDate.map((appointment, i) => <AppointmentSingle key={appointment._id} index={i + 1} appointment={appointment} />)
                                             }
                                         </TableBody>}
                             </Table>

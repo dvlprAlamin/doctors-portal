@@ -21,10 +21,14 @@ const Picker = styled(CalendarPicker)({
     }
 })
 
-const Calendar = ({ date, setDate }) => {
+const Calendar = ({ date, setDate, handler }) => {
     return (
         <LocalizationProvider dateAdapter={AdapterDateFns}>
-            <Picker date={date} onChange={(newDate) => setDate(newDate)} />
+            <Picker date={date}
+                onChange={(newDate) => {
+                    setDate(newDate)
+                    handler(newDate)
+                }} />
         </LocalizationProvider>
     );
 }

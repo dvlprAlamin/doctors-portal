@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import AdapterDateFns from '@mui/lab/AdapterDateFns';
 import LocalizationProvider from '@mui/lab/LocalizationProvider';
 import DatePicker from '@mui/lab/DatePicker';
@@ -25,9 +25,9 @@ const Picker = styled(DatePicker)({
     }
 
 })
-const PickDate = ({ appointByDateHandler }) => {
-    // const [value, setValue] = React.useState(new Date());
-    const { date, setDate } = useMyContext();
+const PickDate = ({ handler }) => {
+    const [date, setDate] = useState(new Date());
+    console.log(date);
     return (
         <LocalizationProvider dateAdapter={AdapterDateFns}>
             <Picker
@@ -35,7 +35,7 @@ const PickDate = ({ appointByDateHandler }) => {
                 value={date}
                 onChange={(newValue) => {
                     setDate(newValue);
-                    appointByDateHandler();
+                    handler(newValue);
                 }}
                 renderInput={(params) => <MuiTextField style={{ maxWidth: 180, padding: 10 }} {...params} helperText={null} />}
             />
