@@ -1,12 +1,24 @@
 import { Container, Paper, Typography, Table, TableBody, TableHead, TableRow, TableContainer } from '@mui/material';
-import React from 'react';
+import axios from 'axios';
+import React, { useEffect, useState } from 'react';
 import PickDate from '../../PickDate/PickDate';
 import DashboardDiv from '../../StyledComponent/DashboardDiv';
+import Loader from '../../StyledComponent/Loader';
 import MuiButton from '../../StyledComponent/MuiButton';
 import TableData from '../../StyledComponent/TableData';
 import AdminSidebar from '../Sidebar/AdminSidebar';
+import PrescriptionSingle from './PrescriptionSingle';
 
 const Prescriptions = () => {
+    const [patients, setPatients] = useState([]);
+    const [loading, setLoading] = useState(true);
+    useEffect(() => {
+        axios.get('http://localhost:5000/approvedAppointments')
+            .then(res => {
+                setPatients(res.data)
+                setLoading(false)
+            })
+    }, [])
     return (
         <>
             <AdminSidebar />
@@ -29,35 +41,15 @@ const Prescriptions = () => {
                                         <TableData>Prescription</TableData>
                                     </TableRow>
                                 </TableHead>
-                                <TableBody>
-                                    <TableRow>
-                                        <TableData>01</TableData>
-                                        <TableData>03-05-21</TableData>
-                                        <TableData>Karim Ahmed</TableData>
-                                        <TableData>+017000000</TableData>
-                                        <TableData>
-                                            <MuiButton>View</MuiButton>
-                                        </TableData>
-                                    </TableRow>
-                                    <TableRow>
-                                        <TableData>01</TableData>
-                                        <TableData>03-05-21</TableData>
-                                        <TableData>Karim Ahmed</TableData>
-                                        <TableData>+017000000</TableData>
-                                        <TableData>
-                                            <MuiButton>View</MuiButton>
-                                        </TableData>
-                                    </TableRow>
-                                    <TableRow>
-                                        <TableData>01</TableData>
-                                        <TableData>03-05-21</TableData>
-                                        <TableData>Karim Ahmed</TableData>
-                                        <TableData>+017000000</TableData>
-                                        <TableData>
-                                            <MuiButton>View</MuiButton>
-                                        </TableData>
-                                    </TableRow>
-                                </TableBody>
+                                {
+                                    loading ?
+                                        <Loader /> :
+                                        <TableBody>
+                                            {
+                                                patients.map((patient, i) => <PrescriptionSingle index={i + 1} key={patient._id} patient={patient} />)
+                                            }
+
+                                        </TableBody>}
                             </Table>
                         </TableContainer>
                     </Paper>

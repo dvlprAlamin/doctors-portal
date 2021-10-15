@@ -4,8 +4,8 @@ import MuiCheckbox from '../../StyledComponent/MuiCheckbox';
 import MuiButton from '../../StyledComponent/MuiButton';
 import { Delete } from '@mui/icons-material';
 import axios from 'axios';
-const AppointmentSingle = ({ item }) => {
-    const { _id, name, phone, date, time, status } = item;
+const AppointmentSingle = ({ index, appointment }) => {
+    const { _id, name, phone, date, time, status } = appointment;
     const [statusValue, setStatusValue] = useState(status)
 
     const handleStatusChange = (id, value) => {
@@ -24,7 +24,7 @@ const AppointmentSingle = ({ item }) => {
     }
     return (
         <TableRow key={_id}>
-            <TableCell>01</TableCell>
+            <TableCell>{index}</TableCell>
             <TableCell>{date?.slice(4, 15)}</TableCell>
             <TableCell>{time?.slice(0, 8)}</TableCell>
             <TableCell>{name}</TableCell>

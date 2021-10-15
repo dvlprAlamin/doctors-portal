@@ -1,10 +1,22 @@
 import { Container, Paper, Typography, Table, TableBody, TableCell, TableHead, TableRow, TableContainer, Grid } from '@mui/material';
-import React from 'react';
+import axios from 'axios';
+import React, { useEffect, useState } from 'react';
 import PickDate from '../../PickDate/PickDate';
 import DashboardDiv from '../../StyledComponent/DashboardDiv';
+import Loader from '../../StyledComponent/Loader';
 import AdminSidebar from '../Sidebar/AdminSidebar';
+import PatientSingle from './PatientSingle';
 
 const Patients = () => {
+    const [patients, setPatients] = useState([]);
+    const [loading, setLoading] = useState(true);
+    useEffect(() => {
+        axios.get('http://localhost:5000/approvedAppointments')
+            .then(res => {
+                setPatients(res.data)
+                setLoading(false)
+            })
+    }, [])
     return (
         <>
             <AdminSidebar />
@@ -25,50 +37,17 @@ const Patients = () => {
                                         <TableCell>Name</TableCell>
                                         <TableCell>Gender</TableCell>
                                         <TableCell>Age</TableCell>
-                                        <TableCell>Weight</TableCell>
                                         <TableCell>Contact</TableCell>
-                                        <TableCell>Address</TableCell>
                                     </TableRow>
                                 </TableHead>
-                                <TableBody>
-                                    <TableRow>
-                                        <TableCell>01</TableCell>
-                                        <TableCell>Karim Ahmed</TableCell>
-                                        <TableCell>Male</TableCell>
-                                        <TableCell>20</TableCell>
-                                        <TableCell>50kg</TableCell>
-                                        <TableCell>0123456789</TableCell>
-                                        <TableCell>South Gazichar, Savar, Dhaka</TableCell>
-                                    </TableRow>
-                                    <TableRow>
-                                        <TableCell>01</TableCell>
-                                        <TableCell>Karim Ahmed</TableCell>
-                                        <TableCell>Male</TableCell>
-                                        <TableCell>20</TableCell>
-                                        <TableCell>50kg</TableCell>
-                                        <TableCell>0123456789</TableCell>
-                                        <TableCell>South Gazichar, Savar, Dhaka</TableCell>
-                                    </TableRow>
-                                    <TableRow>
-                                        <TableCell>01</TableCell>
-                                        <TableCell>Karim Ahmed</TableCell>
-                                        <TableCell>Male</TableCell>
-                                        <TableCell>20</TableCell>
-                                        <TableCell>50kg</TableCell>
-                                        <TableCell>0123456789</TableCell>
-                                        <TableCell>South Gazichar, Savar, Dhaka</TableCell>
-                                    </TableRow>
-                                    <TableRow>
-                                        <TableCell>01</TableCell>
-                                        <TableCell>Karim Ahmed</TableCell>
-                                        <TableCell>Male</TableCell>
-                                        <TableCell>20</TableCell>
-                                        <TableCell>50kg</TableCell>
-                                        <TableCell>0123456789</TableCell>
-                                        <TableCell>South Gazichar, Savar, Dhaka</TableCell>
-                                    </TableRow>
-
-                                </TableBody>
+                                {
+                                    loading ?
+                                        <Loader /> :
+                                        <TableBody>
+                                            {
+                                                patients.map((patient, i) => <PatientSingle key={patient._id} index={i + 1} patient={patient} />)
+                                            }
+                                        </TableBody>}
                             </Table>
                         </TableContainer>
                     </Paper>

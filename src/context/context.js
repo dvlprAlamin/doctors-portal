@@ -14,7 +14,7 @@ export const ContextProvider = ({ children }) => {
 
     const [loggedInUser, setLoggedInUser] = useState({});
     const [isAdmin, setIsAdmin] = useState(false);
-    const [loading, setLoading] = useState(true);
+    const [loading, setLoading] = useState(false);
     const email = loggedInUser?.email
     const auth = getAuth()
 
@@ -35,6 +35,7 @@ export const ContextProvider = ({ children }) => {
 
     useEffect(() => {
         onAuthStateChanged(auth, (user) => {
+
             if (user) {
                 setLoggedInUser(user)
                 setLoading(false)
@@ -60,7 +61,7 @@ export const ContextProvider = ({ children }) => {
     }
     return (
         <userContext.Provider value={value}>
-            {!loading && children}
+            {children}
         </userContext.Provider>
     )
 }

@@ -10,6 +10,7 @@ import TableData from '../../StyledComponent/TableData';
 import Calendar from '../../Calendar/Calendar';
 import axios from 'axios';
 import AppointmentsSingle from './AppointmentsSingle';
+import Loader from '../../StyledComponent/Loader';
 
 // const StaticDatePickerLandscape = () => {
 //     const [date, setDate] = React.useState(new Date());
@@ -36,11 +37,13 @@ const Appointment = () => {
 
     const [date, setDate] = useState(new Date());
     const [appointments, setAppointments] = useState([]);
+    const [loading, setLoading] = useState(true)
     console.log(appointments);
     useEffect(() => {
         axios.get('http://localhost:5000/approvedAppointments')
             .then(res => {
                 setAppointments(res.data)
+                setLoading(false)
             })
     }, [])
     return (
@@ -64,11 +67,15 @@ const Appointment = () => {
                                             <TableData>Action</TableData>
                                         </TableRow>
                                     </TableHead>
-                                    <TableBody>
-                                        {
-                                            appointments.map(item => <AppointmentsSingle item={item} />)
-                                        }
-                                    </TableBody>
+                                    {
+                                        loading ?
+                                            <Loader /> :
+                                            <TableBody>
+                                                {
+                                                    appointments.map(appointment => <AppointmentsSingle appointment={appointment} />)
+                                                }
+                                            </TableBody>
+                                    }
                                 </Table>
                             </Paper>
                         </Grid>

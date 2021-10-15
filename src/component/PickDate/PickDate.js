@@ -25,7 +25,7 @@ const Picker = styled(DatePicker)({
     }
 
 })
-const PickDate = () => {
+const PickDate = ({ appointByDateHandler }) => {
     // const [value, setValue] = React.useState(new Date());
     const { date, setDate } = useMyContext();
     return (
@@ -35,6 +35,7 @@ const PickDate = () => {
                 value={date}
                 onChange={(newValue) => {
                     setDate(newValue);
+                    appointByDateHandler();
                 }}
                 renderInput={(params) => <MuiTextField style={{ maxWidth: 180, padding: 10 }} {...params} helperText={null} />}
             />

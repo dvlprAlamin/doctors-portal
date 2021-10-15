@@ -1,4 +1,4 @@
-import { Container, Paper, Typography, Table, MenuItem, TableBody, TableCell, TableHead, TableRow, TableContainer, Grid, Button, IconButton } from '@mui/material';
+import { Container, Paper, Typography, Table, MenuItem, TableBody, TableCell, TableHead, TableRow, TableContainer, Grid, Button, IconButton, CircularProgress } from '@mui/material';
 import React, { useState, useEffect } from 'react';
 import PickDate from '../../PickDate/PickDate';
 import DashboardDiv from '../../StyledComponent/DashboardDiv';
@@ -12,6 +12,7 @@ import { useMyContext } from '../../../context/context';
 import MuiCheckbox from '../../StyledComponent/MuiCheckbox';
 import { Delete } from '@mui/icons-material';
 import AppointmentSingle from './AppointmentSingle';
+import Loader from '../../StyledComponent/Loader';
 const useStyle = makeStyles({
     gridItem: {
         display: 'flex',
@@ -32,22 +33,26 @@ const Dashboard = () => {
     const { gridItem } = useStyle();
     const { date, loggedInUser } = useMyContext();
     // console.log(date);
+    const [loading, setLoading] = useState(true)
     const [appointments, setAppointments] = useState([]);
     console.log(appointments);
-
-    useEffect(() => {
+    const appointByDateHandler = () => {
         const dataObject = { date: new Date(date).toDateString(), email: loggedInUser.email }
         console.log(dataObject);
         axios.post('https://secret-plains-52601.herokuapp.com/appointmentsByDate', dataObject)
             .then(res => {
                 setAppointments(res.data);
             })
-    }, [date, loggedInUser])
+    }
+    // useEffect(() => {
+
+    // }, [date, loggedInUser])
 
     useEffect(() => {
         axios.get('https://secret-plains-52601.herokuapp.com/appointments')
             .then(res => {
                 setAppointments(res.data);
+                setLoading(false)
             })
     }, [])
 
@@ -77,7 +82,7 @@ const Dashboard = () => {
                         </Grid>
                         <Grid item xs={6} sm={6} md={3} lg={3}>
                             <Paper className={gridItem} style={{ background: '#19D3AE' }}>
-                                <Typography variant="h3">34</Typography>
+                                <Typography variant="h3">{appointments.length}</Typography>
                                 <Typography variant="body1">Total <br /> Appointment</Typography>
                             </Paper>
                         </Grid>
@@ -92,7 +97,7 @@ const Dashboard = () => {
                     <Paper variant="outlined">
                         <div style={{ display: 'flex', justifyContent: 'space-between' }}>
                             <Typography style={{ margin: 15 }} color="primary" variant="body1">Recent Appointments</Typography>
-                            <PickDate />
+                            <PickDate appointByDateHandler={appointByDateHandler} />
                         </div>
                         <TableContainer>
                             <Table>
@@ -104,27 +109,17 @@ const Dashboard = () => {
                                         <TableCell>Name</TableCell>
                                         <TableCell>Contact</TableCell>
                                         <TableCell>Prescription</TableCell>
-                                        <TableCell>Action</TableCell>
+                                        <TableCell>Status</TableCell>
                                     </TableRow>
                                 </TableHead>
-                                <TableBody>
-                                    {
-                                        appointments.map(item => <AppointmentSingle item={item} />)
-                                    }
-                                    {/* <TableRow>
-                                        <TableCell>01</TableCell>
-                                        <TableCell>05-05-21</TableCell>
-                                        <TableCell>6.00 PM</TableCell>
-                                        <TableCell>Karim Ahmed</TableCell>
-                                        <TableCell>0123456789</TableCell>
-                                        <TableCell>
-                                            <MuiButton>View</MuiButton>
-                                        </TableCell>
-                                        <TableCell>
-                                            <Button>Pending</Button><IconButton><EditIcon /> </IconButton>
-                                        </TableCell>
-                                    </TableRow> */}
-                                </TableBody>
+                                {
+                                    loading ?
+                                        <Loader /> :
+                                        <TableBody>
+                                            {
+                                                appointments.map((appointment, i) => <AppointmentSingle key={appointment._id} index={i + 1} appointment={appointment} />)
+                                            }
+                                        </TableBody>}
                             </Table>
                         </TableContainer>
                     </Paper>

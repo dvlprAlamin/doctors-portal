@@ -43,16 +43,16 @@ const AppointmentModal = ({ open, setOpen, date }) => {
         axios.post('https://secret-plains-52601.herokuapp.com/addAppointment', formData)
             .then(res => {
                 console.log(res.data);
+                res.data && setOpen(false)
             })
     }
 
-    const handleClose = () => setOpen(false);
     return (
         <Modal
             aria-labelledby="transition-modal-title"
             aria-describedby="transition-modal-description"
             open={open}
-            onClose={handleClose}
+            onClose={() => setOpen(false)}
             closeAfterTransition
             BackdropComponent={Backdrop}
             BackdropProps={{
