@@ -11,6 +11,7 @@ import Dashboard from './component/Dashboard/Dashboard/Dashboard';
 import Appointment from './component/Appointment/Appointment';
 import Login from './component/Login/Login';
 import PrivateRoute from './component/PrivateRoute/PrivateRoute';
+import Skleton from './component/Skleton/Skleton';
 function App() {
 
   return (
@@ -23,6 +24,9 @@ function App() {
 
           <Route exact path="/login">
             <Login />
+          </Route>
+          <Route exact path="/skleton">
+            <Skleton />
           </Route>
           <Route exact path="/appointment">
             <Appointment />
