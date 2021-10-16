@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import AdapterDateFns from '@mui/lab/AdapterDateFns';
 import LocalizationProvider from '@mui/lab/LocalizationProvider';
-import { Container, Grid, MenuItem, Paper, Table, TableBody, TableHead, TableRow, Typography } from '@mui/material';
+import { CircularProgress, Container, Grid, MenuItem, Paper, Table, TableBody, TableHead, TableRow, Typography } from '@mui/material';
 import AdminSidebar from '../Sidebar/AdminSidebar';
 import { CalendarPicker } from '@mui/lab';
 import MuiCheckbox from '../../StyledComponent/MuiCheckbox';
@@ -80,15 +80,17 @@ const Appointment = () => {
                                         </TableRow>
                                     </TableHead>
                                     {
-                                        loading ?
-                                            <Loader /> :
-                                            <TableBody>
-                                                {
-                                                    appointmentsByDate.map(appointment => <AppointmentsSingle appointment={appointment} />)
-                                                }
-                                            </TableBody>
+                                        !loading &&
+                                        <TableBody>
+                                            {
+                                                appointmentsByDate.map(appointment => <AppointmentsSingle appointment={appointment} />)
+                                            }
+                                        </TableBody>
                                     }
                                 </Table>
+                                {loading ?
+                                    <Loader /> :
+                                    (appointmentsByDate.length === 0 && <Typography margin="50px 0" textAlign="center">No Appointments Found!</Typography>)}
                             </Paper>
                         </Grid>
                     </Grid>

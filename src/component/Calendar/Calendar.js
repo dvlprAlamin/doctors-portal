@@ -27,7 +27,7 @@ const Calendar = ({ date, setDate, handler }) => {
             <Picker date={date}
                 onChange={(newDate) => {
                     setDate(newDate)
-                    handler(newDate)
+                    handler && handler(newDate)
                 }} />
         </LocalizationProvider>
     );

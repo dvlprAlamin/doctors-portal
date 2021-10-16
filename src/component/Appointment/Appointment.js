@@ -6,12 +6,19 @@ import MuiButton from './../StyledComponent/MuiButton'
 import AppointmentModal from './AppointmentModal';
 import Navigation from '../Navigation/Navigation';
 import Footer from '../Footer/Footer'
+import Popup from '../Popup/Popup';
 const Appointment = () => {
     const [date, setDate] = useState(new Date());
     const [open, setOpen] = useState(false);
+    const [openPopup, setOpenPopup] = useState(false)
     return (
         <>
             <Navigation />
+            <Popup
+                openPopup={openPopup}
+                setOpenPopup={setOpenPopup}
+                severity="success"
+                message="Appointment Success" />
             <Container>
                 <Grid container spacing={3} alignItems="center" height="90vh">
                     <Grid item sm={12} md={6} lg={6}>
@@ -72,7 +79,7 @@ const Appointment = () => {
                         </Paper>
                     </Grid>
                 </Grid>
-                <AppointmentModal open={open} setOpen={setOpen} date={date} />
+                <AppointmentModal open={open} setOpen={setOpen} date={date} setOpenPopup={setOpenPopup} />
             </Container>
             <Footer />
         </>

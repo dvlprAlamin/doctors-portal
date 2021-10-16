@@ -7,6 +7,7 @@ import { Grid, LinearProgress, MenuItem } from '@mui/material';
 import MuiButton from '../StyledComponent/MuiButton';
 import MuiTextField from '../StyledComponent/MuiTextField';
 import axios from 'axios';
+import Popup from '../Popup/Popup';
 
 const style = {
     position: 'absolute',
@@ -22,10 +23,11 @@ const style = {
     padding: 4,
 };
 
-const AppointmentModal = ({ open, setOpen, date }) => {
+const AppointmentModal = ({ open, setOpen, date, setOpenPopup }) => {
     const [gender, setGender] = useState('none');
     const [formData, setFormData] = useState({});
     const [loading, setLoading] = useState(false)
+
     const handleChange = e => {
         const newData = {
             ...formData,
@@ -47,6 +49,7 @@ const AppointmentModal = ({ open, setOpen, date }) => {
                 if (res.data) {
                     setOpen(false)
                     setLoading(false);
+                    setOpenPopup(true)
                 }
             })
     }
@@ -63,6 +66,7 @@ const AppointmentModal = ({ open, setOpen, date }) => {
                 timeout: 500,
             }}
         >
+
             <Fade in={open}>
                 <Box sx={style}>
                     {loading && <LinearProgress />}

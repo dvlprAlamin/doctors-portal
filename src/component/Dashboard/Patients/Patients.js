@@ -52,15 +52,19 @@ const Patients = () => {
                                     </TableRow>
                                 </TableHead>
                                 {
-                                    loading ?
-                                        <Loader /> :
-                                        <TableBody>
-                                            {
-                                                patientByDate.map((patient, i) => <PatientSingle key={patient._id} index={i + 1} patient={patient} />)
-                                            }
-                                        </TableBody>}
+                                    !loading &&
+                                    <TableBody>
+                                        {
+                                            patientByDate.map((patient, i) => <PatientSingle key={patient._id} index={i + 1} patient={patient} />)
+                                        }
+                                    </TableBody>
+                                }
+
                             </Table>
                         </TableContainer>
+                        {loading ?
+                            <Loader /> :
+                            (patientByDate.length === 0 && <Typography margin="50px 0" textAlign="center">No Patient Found!</Typography>)}
                     </Paper>
                 </Container>
             </DashboardDiv>

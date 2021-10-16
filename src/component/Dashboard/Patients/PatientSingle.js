@@ -11,6 +11,7 @@ const PatientSingle = ({ index, patient }) => {
             <TableCell>{age}</TableCell>
             <TableCell>{phone}</TableCell>
         </TableRow>
+
     );
 };
 

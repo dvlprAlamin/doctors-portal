@@ -52,16 +52,19 @@ const Prescriptions = () => {
                                     </TableRow>
                                 </TableHead>
                                 {
-                                    loading ?
-                                        <Loader /> :
-                                        <TableBody>
-                                            {
-                                                prescriptionByDate.map((patient, i) => <PrescriptionSingle index={i + 1} key={patient._id} patient={patient} />)
-                                            }
+                                    !loading &&
+                                    <TableBody>
+                                        {
+                                            prescriptionByDate.map((patient, i) => <PrescriptionSingle index={i + 1} key={patient._id} patient={patient} />)
+                                        }
 
-                                        </TableBody>}
+                                    </TableBody>}
                             </Table>
                         </TableContainer>
+
+                        {loading ?
+                            <Loader /> :
+                            (prescriptionByDate.length === 0 && <Typography margin="50px 0" textAlign="center">No Prescription Found!</Typography>)}
                     </Paper>
                 </Container>
             </DashboardDiv>

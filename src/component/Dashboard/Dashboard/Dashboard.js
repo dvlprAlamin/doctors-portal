@@ -114,14 +114,16 @@ const Dashboard = () => {
                                     </TableRow>
                                 </TableHead>
                                 {
-                                    loading ?
-                                        <Loader /> :
-                                        <TableBody>
-                                            {
-                                                appointmentsByDate.map((appointment, i) => <AppointmentSingle key={appointment._id} index={i + 1} appointment={appointment} />)
-                                            }
-                                        </TableBody>}
+                                    !loading &&
+                                    <TableBody>
+                                        {
+                                            appointmentsByDate.map((appointment, i) => <AppointmentSingle key={appointment._id} index={i + 1} appointment={appointment} />)
+                                        }
+                                    </TableBody>}
                             </Table>
+                            {loading ?
+                                <Loader /> :
+                                (appointmentsByDate.length === 0 && <Typography margin="50px 0" textAlign="center">No Appointments Found!</Typography>)}
                         </TableContainer>
                     </Paper>
                 </Container>
