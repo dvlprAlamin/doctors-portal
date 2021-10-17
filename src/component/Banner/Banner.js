@@ -37,22 +37,6 @@ const useStyle = makeStyles({
     bannerContent: {
         alignItems: 'center',
         height: '90vh',
-        '& h3': {
-            fontWeight: 700
-        },
-        '& p': {
-            margin: '20px 0',
-            maxWidth: 500
-        },
-        '& img': {
-            width: '100%'
-        },
-        '& .bannerLeft': {
-            flex: 1
-        },
-        '& .bannerRight': {
-            flex: 1
-        }
     }
 
 })
@@ -64,11 +48,11 @@ const Banner = () => {
             <Container>
                 <Grid container className={bannerContent}>
                     <Grid item xs={12} sm={12} md={6} lg={6} order={{ xs: 2, sm: 2, md: 1 }}>
-                        <Typography variant="h3">
+                        <Typography variant="h3" fontWeight={700}>
                             Your New Smile <br />
                             Starts Here
                         </Typography>
-                        <Typography variant="body1">
+                        <Typography variant="body1" maxWidth={500} margin="20px 0">
                             Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry’s standard dummy text ever since the
                         </Typography>
                         <Link to='/appointment' style={{ textDecoration: 'none' }}><MuiButton sx={{ padding: '10px 20px !important' }}>Get Appointment</MuiButton></Link>

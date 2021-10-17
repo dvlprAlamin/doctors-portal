@@ -1,12 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import AdapterDateFns from '@mui/lab/AdapterDateFns';
 import LocalizationProvider from '@mui/lab/LocalizationProvider';
-import { CircularProgress, Container, Grid, MenuItem, Paper, Table, TableBody, TableHead, TableRow, Typography } from '@mui/material';
+import { CircularProgress, Container, Grid, MenuItem, Paper, Table, TableBody, TableCell, TableHead, TableRow, Typography } from '@mui/material';
 import AdminSidebar from '../Sidebar/AdminSidebar';
 import { CalendarPicker } from '@mui/lab';
 import MuiCheckbox from '../../StyledComponent/MuiCheckbox';
 import DashboardDiv from '../../StyledComponent/DashboardDiv';
-import TableData from '../../StyledComponent/TableData';
 import Calendar from '../../Calendar/Calendar';
 import axios from 'axios';
 import AppointmentsSingle from './AppointmentsSingle';
@@ -75,9 +74,9 @@ const Appointment = () => {
                                 <Table>
                                     <TableHead>
                                         <TableRow>
-                                            <TableData>Name</TableData>
-                                            <TableData>Schedule</TableData>
-                                            <TableData>Action</TableData>
+                                            <TableCell>Name</TableCell>
+                                            <TableCell>Schedule</TableCell>
+                                            <TableCell>Action</TableCell>
                                         </TableRow>
                                     </TableHead>
                                     {

@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
-import { MenuItem, TableRow } from '@mui/material';
-import TableData from '../../StyledComponent/TableData';
+import { MenuItem, TableCell, TableRow } from '@mui/material';
 import MuiCheckbox from '../../StyledComponent/MuiCheckbox';
 import axios from 'axios';
 
@@ -17,11 +16,11 @@ const AppointmentsSingle = ({ appointment, doctor }) => {
     };
     return (
         <TableRow>
-            <TableData>{name}</TableData>
-            <TableData>{time?.slice(0, 8)}</TableData>
+            <TableCell>{name}</TableCell>
+            <TableCell>{time?.slice(0, 8)}</TableCell>
             {
                 doctor &&
-                <TableData>
+                <TableCell>
                     <MuiCheckbox
                         select
                         onChange={handleChange}
@@ -30,7 +29,7 @@ const AppointmentsSingle = ({ appointment, doctor }) => {
                         <MenuItem value='not visited'>Not Visited</MenuItem>
                         <MenuItem value='visited'>Visited</MenuItem>
                     </MuiCheckbox>
-                </TableData>}
+                </TableCell>}
         </TableRow>
     );
 };

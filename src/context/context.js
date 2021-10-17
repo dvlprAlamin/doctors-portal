@@ -15,7 +15,7 @@ export const ContextProvider = ({ children }) => {
 
     const [loggedInUser, setLoggedInUser] = useState({});
     const [isDoctor, setIsDoctor] = useState(false);
-    const [loading, setLoading] = useState(false);
+    const [loading, setLoading] = useState(true);
     const email = loggedInUser?.email;
     useEffect(() => {
         axios.post('http://localhost:5000/isDoctor', { email })
@@ -42,16 +42,12 @@ export const ContextProvider = ({ children }) => {
 
     useEffect(() => {
         onAuthStateChanged(auth, (user) => {
-
             if (user) {
                 setLoggedInUser(user)
-                setLoading(false)
-                const uid = user.uid;
-                // ...
             } else {
                 // User is signed out
-                // ...
             }
+            setLoading(false)
         });
     }, []);
 
@@ -68,7 +64,7 @@ export const ContextProvider = ({ children }) => {
     }
     return (
         <userContext.Provider value={value}>
-            {children}
+            {!loading && children}
         </userContext.Provider>
     )
 }

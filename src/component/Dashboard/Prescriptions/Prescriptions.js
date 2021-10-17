@@ -1,11 +1,10 @@
-import { Container, Paper, Typography, Table, TableBody, TableHead, TableRow, TableContainer } from '@mui/material';
+import { Container, Paper, Typography, Table, TableBody, TableHead, TableRow, TableContainer, TableCell } from '@mui/material';
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import PickDate from '../../PickDate/PickDate';
 import DashboardDiv from '../../StyledComponent/DashboardDiv';
 import Loader from '../../StyledComponent/Loader';
 import MuiButton from '../../StyledComponent/MuiButton';
-import TableData from '../../StyledComponent/TableData';
 import PageHeader from '../PageHeader/PageHeader';
 import AdminSidebar from '../Sidebar/AdminSidebar';
 import PrescriptionSingle from './PrescriptionSingle';
@@ -45,11 +44,11 @@ const Prescriptions = () => {
                             <Table>
                                 <TableHead>
                                     <TableRow>
-                                        <TableData>Sr. No</TableData>
-                                        <TableData>Date</TableData>
-                                        <TableData>Name</TableData>
-                                        <TableData>Contact</TableData>
-                                        <TableData>Prescription</TableData>
+                                        <TableCell>Sr. No</TableCell>
+                                        <TableCell>Date</TableCell>
+                                        <TableCell>Name</TableCell>
+                                        <TableCell>Contact</TableCell>
+                                        <TableCell>Prescription</TableCell>
                                     </TableRow>
                                 </TableHead>
                                 {

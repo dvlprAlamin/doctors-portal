@@ -2,8 +2,6 @@ import { BrowserRouter, Switch, Route } from 'react-router-dom';
 import Home from './component/Home/Home/Home';
 import { ThemeProvider } from '@emotion/react';
 import { theme } from './theme';
-import Navigation from './component/Navigation/Navigation';
-import AdminSidebar from './component/Dashboard/Sidebar/AdminSidebar';
 import Appointments from './component/Dashboard/Appointments/Appointments';
 import Patients from './component/Dashboard/Patients/Patients';
 import Prescriptions from './component/Dashboard/Prescriptions/Prescriptions';
@@ -11,7 +9,6 @@ import Dashboard from './component/Dashboard/Dashboard/Dashboard';
 import Appointment from './component/Appointment/Appointment';
 import Login from './component/Login/Login';
 import PrivateRoute from './component/PrivateRoute/PrivateRoute';
-import Skleton from './component/Skleton/Skleton';
 import AddDoctor from './component/Dashboard/AddDoctor/AddDoctor';
 import { useMyContext } from './context/context';
 import UserAppointments from './component/Dashboard/UserAppointments/UserAppointments';
@@ -26,9 +23,6 @@ function App() {
           </Route>
           <Route exact path="/login">
             <Login />
-          </Route>
-          <Route exact path="/skleton">
-            <Skleton />
           </Route>
           <Route exact path="/appointment">
             <Appointment />

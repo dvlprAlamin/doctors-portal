@@ -1,19 +1,18 @@
-import { TableRow } from '@mui/material';
+import { TableCell, TableRow } from '@mui/material';
 import React from 'react';
 import MuiButton from '../../StyledComponent/MuiButton';
-import TableData from '../../StyledComponent/TableData';
 
 const PrescriptionSingle = ({ index, patient }) => {
     const { name, date, phone } = patient;
     return (
         <TableRow>
-            <TableData>{index}</TableData>
-            <TableData>{date}</TableData>
-            <TableData>{name}</TableData>
-            <TableData>{phone}</TableData>
-            <TableData>
+            <TableCell>{index}</TableCell>
+            <TableCell>{date}</TableCell>
+            <TableCell>{name}</TableCell>
+            <TableCell>{phone}</TableCell>
+            <TableCell>
                 <MuiButton>View</MuiButton>
-            </TableData>
+            </TableCell>
         </TableRow>
     );
 };

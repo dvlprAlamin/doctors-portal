@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import { Container, Grid, Paper, Table, TableBody, TableHead, TableRow, Typography } from '@mui/material';
+import { Container, Grid, Paper, Table, TableBody, TableCell, TableHead, TableRow, Typography } from '@mui/material';
 import DashboardDiv from '../../StyledComponent/DashboardDiv';
-import TableData from '../../StyledComponent/TableData';
 import Calendar from '../../Calendar/Calendar';
 import axios from 'axios';
 import Loader from '../../StyledComponent/Loader';
@@ -53,8 +52,8 @@ const UserAppointments = () => {
                                 <Table>
                                     <TableHead>
                                         <TableRow>
-                                            <TableData>Name</TableData>
-                                            <TableData>Schedule</TableData>
+                                            <TableCell>Name</TableCell>
+                                            <TableCell>Schedule</TableCell>
                                         </TableRow>
                                     </TableHead>
                                     {
