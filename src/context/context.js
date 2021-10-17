@@ -1,6 +1,7 @@
 import { createContext, useContext, useEffect, useState } from "react";
 import firebaseInitialize from "../firebase/firebaseConfig";
 import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signInWithPopup, GoogleAuthProvider, onAuthStateChanged, signOut } from "firebase/auth";
+import axios from "axios";
 const userContext = createContext();
 
 export const useMyContext = () => {
@@ -13,9 +14,15 @@ export const ContextProvider = ({ children }) => {
     const [date, setDate] = useState(new Date());
 
     const [loggedInUser, setLoggedInUser] = useState({});
-    const [isAdmin, setIsAdmin] = useState(false);
+    const [isDoctor, setIsDoctor] = useState(false);
     const [loading, setLoading] = useState(false);
-    const email = loggedInUser?.email
+    const email = loggedInUser?.email;
+    useEffect(() => {
+        axios.post('http://localhost:5000/isDoctor', { email })
+            .then(res => {
+                setIsDoctor(res.data);
+            })
+    }, [email])
     const auth = getAuth()
 
     const signUp = (email, password) => {
@@ -55,7 +62,7 @@ export const ContextProvider = ({ children }) => {
         login,
         googleSignIn,
         logOut,
-        isAdmin,
+        isDoctor,
         date,
         setDate
     }

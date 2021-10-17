@@ -4,22 +4,24 @@ import MuiCheckbox from '../../StyledComponent/MuiCheckbox';
 import MuiButton from '../../StyledComponent/MuiButton';
 import { Delete } from '@mui/icons-material';
 import axios from 'axios';
-const AppointmentSingle = ({ index, appointment }) => {
+const AppointmentSingle = ({ index, appointment, setAppointmentsByDate, getCount }) => {
     const { _id, name, phone, date, time, status } = appointment;
     const [statusValue, setStatusValue] = useState(status)
 
     const handleStatusChange = (id, value) => {
         setStatusValue(value);
-        console.log(id, value);
         axios.patch(`http://localhost:5000/updateStatus/${id}`, { status: value })
             .then(res => {
                 console.log(res.data);
+                getCount('pending')
+                getCount('approved')
             })
     };
     const deleteAppointmentHandler = id => {
         axios.delete(`http://localhost:5000/deleteAppointment/${id}`)
             .then(res => {
                 console.log(res.data);
+                setAppointmentsByDate(prev => prev.filter(item => item._id !== id))
             })
     }
     return (

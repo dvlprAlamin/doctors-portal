@@ -71,7 +71,7 @@ const Banner = () => {
                         <Typography variant="body1">
                             Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry’s standard dummy text ever since the
                         </Typography>
-                        <Link to='/appointment' style={{ textDecoration: 'none' }}><MuiButton>Get Appointment</MuiButton></Link>
+                        <Link to='/appointment' style={{ textDecoration: 'none' }}><MuiButton sx={{ padding: '10px 20px !important' }}>Get Appointment</MuiButton></Link>
                     </Grid>
                     <Grid item md={6} lg={6} order={{ xs: 1, sm: 1, md: 2 }}>
                         <img src={chairImg} className={bannerImg} alt="" />

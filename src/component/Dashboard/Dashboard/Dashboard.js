@@ -13,6 +13,7 @@ import MuiCheckbox from '../../StyledComponent/MuiCheckbox';
 import { Delete } from '@mui/icons-material';
 import AppointmentSingle from './AppointmentSingle';
 import Loader from '../../StyledComponent/Loader';
+import PageHeader from '../PageHeader/PageHeader';
 const useStyle = makeStyles({
     gridItem: {
         display: 'flex',
@@ -36,6 +37,11 @@ const Dashboard = () => {
     const [loading, setLoading] = useState(true)
     const [appointments, setAppointments] = useState([]);
     const [appointmentsByDate, setAppointmentsByDate] = useState([]);
+    // const [approved,setApproved] = useState(0);
+    const getCount = name => {
+        const amount = appointments.filter(item => item.status === name)
+        return amount.length;
+    }
 
     useEffect(() => {
         axios.get('https://secret-plains-52601.herokuapp.com/appointments')
@@ -43,6 +49,7 @@ const Dashboard = () => {
                 setAppointments(res.data);
                 setAppointmentsByDate(res.data)
                 setLoading(false)
+                console.log(res.data);
             })
     }, [])
 
@@ -63,15 +70,11 @@ const Dashboard = () => {
             <AdminSidebar />
             <DashboardDiv>
                 <Container>
-
-                    <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                        <Typography style={{ marginBottom: 25 }} variant="h6">Dashboard</Typography>
-                        <UserAvatar />
-                    </div>
+                    <PageHeader title="Dashboard" />
                     <Grid container spacing={2} style={{ marginBottom: 20 }}>
                         <Grid item xs={6} sm={6} md={3} lg={3}>
                             <Paper className={gridItem} style={{ background: '#F1536E' }}>
-                                <Typography variant="h3">09</Typography>
+                                <Typography variant="h3">{getCount('pending')}</Typography>
                                 <Typography variant="body1">Pending <br /> Appointment</Typography>
                             </Paper>
                         </Grid>
@@ -83,13 +86,13 @@ const Dashboard = () => {
                         </Grid>
                         <Grid item xs={6} sm={6} md={3} lg={3}>
                             <Paper className={gridItem} style={{ background: '#19D3AE' }}>
-                                <Typography variant="h3">86</Typography>
+                                <Typography variant="h3">{appointments?.length}</Typography>
                                 <Typography variant="body1">Total <br /> Appointment</Typography>
                             </Paper>
                         </Grid>
                         <Grid item xs={6} sm={6} md={3} lg={3}>
                             <Paper className={gridItem} style={{ background: '#FDA006' }}>
-                                <Typography variant="h3">78</Typography>
+                                <Typography variant="h3">{getCount('approved')}</Typography>
                                 <Typography variant="body1">Total <br /> Patients</Typography>
                             </Paper>
                         </Grid>
@@ -117,7 +120,14 @@ const Dashboard = () => {
                                     !loading &&
                                     <TableBody>
                                         {
-                                            appointmentsByDate.map((appointment, i) => <AppointmentSingle key={appointment._id} index={i + 1} appointment={appointment} />)
+                                            appointmentsByDate.map((appointment, i) =>
+                                                <AppointmentSingle
+                                                    key={appointment._id}
+                                                    index={i + 1}
+                                                    appointment={appointment}
+                                                    setAppointmentsByDate={setAppointmentsByDate}
+                                                    getCount={getCount}
+                                                />)
                                         }
                                     </TableBody>}
                             </Table>

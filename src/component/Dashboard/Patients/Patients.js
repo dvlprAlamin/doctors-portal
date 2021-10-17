@@ -4,6 +4,7 @@ import React, { useEffect, useState } from 'react';
 import PickDate from '../../PickDate/PickDate';
 import DashboardDiv from '../../StyledComponent/DashboardDiv';
 import Loader from '../../StyledComponent/Loader';
+import PageHeader from '../PageHeader/PageHeader';
 import AdminSidebar from '../Sidebar/AdminSidebar';
 import PatientSingle from './PatientSingle';
 
@@ -34,7 +35,7 @@ const Patients = () => {
             <DashboardDiv>
                 <Container>
 
-                    <Typography style={{ marginBottom: 25 }} variant="h6">Patients</Typography>
+                    <PageHeader title="Patients" />
                     <Paper variant="outlined">
                         <div style={{ display: 'flex', justifyContent: 'space-between' }}>
                             <Typography style={{ margin: 15 }} color="primary" variant="body1">All Patients</Typography>

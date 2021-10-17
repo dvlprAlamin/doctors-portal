@@ -1,67 +1,45 @@
 import React, { useEffect, useState } from 'react';
-import AdapterDateFns from '@mui/lab/AdapterDateFns';
-import LocalizationProvider from '@mui/lab/LocalizationProvider';
-import { CircularProgress, Container, Grid, MenuItem, Paper, Table, TableBody, TableHead, TableRow, Typography } from '@mui/material';
-import AdminSidebar from '../Sidebar/AdminSidebar';
-import { CalendarPicker } from '@mui/lab';
-import MuiCheckbox from '../../StyledComponent/MuiCheckbox';
+import { Container, Grid, Paper, Table, TableBody, TableHead, TableRow, Typography } from '@mui/material';
 import DashboardDiv from '../../StyledComponent/DashboardDiv';
 import TableData from '../../StyledComponent/TableData';
 import Calendar from '../../Calendar/Calendar';
 import axios from 'axios';
-import AppointmentsSingle from './AppointmentsSingle';
 import Loader from '../../StyledComponent/Loader';
 import PageHeader from '../PageHeader/PageHeader';
-
-// const StaticDatePickerLandscape = () => {
-//     const [date, setDate] = React.useState(new Date());
-//     return (
-//         <LocalizationProvider dateAdapter={AdapterDateFns}>
-//             <CalendarPicker date={date} onChange={(newDate) => setDate(newDate)} />
-//         </LocalizationProvider>
-//     );
-// }
+import UserSidebar from '../Sidebar/UserSidebar';
+import AppointmentsSingle from '../Appointments/AppointmentsSingle';
+import { useMyContext } from '../../../context/context';
 
 
-const Appointment = () => {
-    // const useStyle = makeStyles({
-    //     root: {
-    //         marginLeft: 220,
-    //         marginTop: 20
-    //     },
-    //     gridItem: {
-    //         minHeight: 450,
-    //         marginTop: 20
-    //     }
-    // })
-    // const { root, gridItem } = useStyle();
-
+const UserAppointments = () => {
+    const { loggedInUser } = useMyContext();
     const [date, setDate] = useState(new Date());
-    const [appointments, setAppointments] = useState([]);
     const [loading, setLoading] = useState(true)
-    // console.log(appointments);
+    const [appointmentsByDate, setAppointmentsByDate] = useState([])
     useEffect(() => {
-        axios.get('http://localhost:5000/approvedAppointments')
+        const dataObject = { date: new Date().toDateString(), email: loggedInUser.email }
+        axios.get('https://secret-plains-52601.herokuapp.com/appointmentsByDate', dataObject)
             .then(res => {
-                setAppointments(res.data);
                 setAppointmentsByDate(res.data)
+                setLoading(false)
+            })
+            .catch(err => {
                 setLoading(false)
             })
     }, [])
 
-    const [appointmentsByDate, setAppointmentsByDate] = useState([])
-    console.log(appointmentsByDate);
     const appointmentsByDateHandler = date => {
-        const dataObject = { date: new Date(date).toDateString() }
+        const dataObject = { date: new Date(date).toDateString(), email: loggedInUser.email }
         console.log(dataObject);
-        axios.post('http://localhost:5000/appointmentsByDate', dataObject)
+        axios.post('https://secret-plains-52601.herokuapp.com/appointmentsByDate', dataObject)
             .then(res => {
                 setAppointmentsByDate(res.data);
+                setLoading(false)
             })
     }
     return (
         <>
-            <AdminSidebar />
+            <UserSidebar />
             <DashboardDiv>
                 <Container>
                     <PageHeader title="Appointments" />
@@ -77,14 +55,13 @@ const Appointment = () => {
                                         <TableRow>
                                             <TableData>Name</TableData>
                                             <TableData>Schedule</TableData>
-                                            <TableData>Action</TableData>
                                         </TableRow>
                                     </TableHead>
                                     {
                                         !loading &&
                                         <TableBody>
                                             {
-                                                appointmentsByDate.map(appointment => <AppointmentsSingle appointment={appointment} doctor={true} />)
+                                                appointmentsByDate.map(appointment => <AppointmentsSingle appointment={appointment} doctor={false} />)
                                             }
                                         </TableBody>
                                     }
@@ -101,4 +78,5 @@ const Appointment = () => {
     );
 };
 
-export default Appointment;
+export default UserAppointments;
+

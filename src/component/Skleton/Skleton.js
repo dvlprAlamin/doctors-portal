@@ -102,13 +102,27 @@ export default function Skleton() {
                             {
 
                                 <>
-                                    <TableHead>
+                                    {/* <TableHead>
                                         <TableRow>
                                             {
                                                 Object.keys(appointments[0]).map(item => (
                                                     <TableCell>{item}</TableCell>
                                                 ))
                                             }
+                                        </TableRow>
+                                    </TableHead> */}
+                                    <TableHead>
+                                        <TableRow>
+                                            <TableCell>Sr. No</TableCell>
+                                            <TableCell>Date</TableCell>
+                                            <TableCell>Time</TableCell>
+                                            <TableCell>Name</TableCell>
+                                            <TableCell>Contact</TableCell>
+                                            <TableCell>Prescription</TableCell>
+                                            <TableCell>Prescription</TableCell>
+                                            <TableCell>Prescription</TableCell>
+                                            <TableCell>Prescription</TableCell>
+                                            <TableCell>Status</TableCell>
                                         </TableRow>
                                     </TableHead>
                                     <TableBody>
@@ -118,8 +132,8 @@ export default function Skleton() {
 
                                                 <TableRow>
                                                     {
-                                                        (items ? Object.values(items) : Array.from(new Array(8))).map(item => (
-                                                            <TableCell>{item ? item.slice(0, 10) : <Skeleton height={30} />}</TableCell>
+                                                        (items ? Object.values(items) : Array.from(new Array(10))).map(item => (
+                                                            <TableCell>{item ? item.slice(0, 10) : <Skeleton animation="wave" />}</TableCell>
                                                         ))
                                                     }
                                                 </TableRow>

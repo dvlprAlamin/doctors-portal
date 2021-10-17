@@ -70,7 +70,7 @@ const useStyles = makeStyles({
 
     },
     logOutBtnContainer: {
-        height: '100%',
+        height: '80%',
         display: 'flex',
         justifyContent: 'center',
         alignItems: 'flex-end'

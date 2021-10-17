@@ -6,6 +6,7 @@ import DashboardDiv from '../../StyledComponent/DashboardDiv';
 import Loader from '../../StyledComponent/Loader';
 import MuiButton from '../../StyledComponent/MuiButton';
 import TableData from '../../StyledComponent/TableData';
+import PageHeader from '../PageHeader/PageHeader';
 import AdminSidebar from '../Sidebar/AdminSidebar';
 import PrescriptionSingle from './PrescriptionSingle';
 
@@ -34,7 +35,7 @@ const Prescriptions = () => {
             <AdminSidebar />
             <DashboardDiv>
                 <Container>
-                    <Typography style={{ marginBottom: 25 }} variant="h6">Prescriptions</Typography>
+                    <PageHeader title="Prescription" />
                     <Paper variant="outlined">
                         <div style={{ display: 'flex', justifyContent: 'space-between' }}>
                             <Typography style={{ margin: 15 }} color="primary" variant="body1">All Prescriptions</Typography>
