@@ -18,7 +18,7 @@ const AppointmentsSingle = ({ appointment, doctor }) => {
     return (
         <TableRow>
             <TableData>{name}</TableData>
-            <TableData>{time?.slice(0, 9)}</TableData>
+            <TableData>{time?.slice(0, 8)}</TableData>
             {
                 doctor &&
                 <TableData>

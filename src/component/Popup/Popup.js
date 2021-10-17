@@ -7,17 +7,17 @@ const Alert = React.forwardRef(function Alert(props, ref) {
     return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
 });
 
-export default function Popup({ openPopup, setOpenPopup, severity, message }) {
+export default function Popup({ openPopup, setOpenPopup }) {
     return (
         <Stack spacing={2} sx={{ width: '100%' }}>
             <Snackbar
-                open={openPopup}
+                open={openPopup?.status}
                 autoHideDuration={6000}
-                onClose={() => setOpenPopup(false)}
+                onClose={() => setOpenPopup({ ...openPopup, status: false })}
                 anchorOrigin={{ vertical: 'bottom', horizontal: 'center' }}
             >
-                <Alert onClose={() => setOpenPopup(false)} severity={severity} sx={{ width: '100%' }}>
-                    {message}
+                <Alert onClose={() => setOpenPopup({ ...openPopup, status: false })} severity={openPopup?.severity} sx={{ width: '100%' }}>
+                    {openPopup?.message}
                 </Alert>
             </Snackbar>
         </Stack>

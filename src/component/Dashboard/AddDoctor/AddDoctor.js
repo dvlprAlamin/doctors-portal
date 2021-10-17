@@ -1,28 +1,34 @@
-import { Button, Container, Input, Paper, Typography } from '@mui/material';
+import { Container, Paper } from '@mui/material';
 import axios from 'axios';
 import React, { useState } from 'react';
+import Popup from '../../Popup/Popup';
 import DashboardDiv from '../../StyledComponent/DashboardDiv';
+import Loader from '../../StyledComponent/Loader';
 import MuiButton from '../../StyledComponent/MuiButton';
 import MuiTextField from '../../StyledComponent/MuiTextField';
 import PageHeader from '../PageHeader/PageHeader';
 import AdminSidebar from '../Sidebar/AdminSidebar';
-import UserAvatar from '../Sidebar/UserAvatar';
 
 const AddDoctor = () => {
     const [infoData, setInfoData] = useState({})
     const [image, setImage] = useState(null);
+    const [loading, setLoading] = useState(false);
+    const [openPopup, setOpenPopup] = useState({
+        status: false,
+        message: null,
+        severity: null
+    })
     const handleImage = e => {
         const newImg = e.target.files[0];
         setImage(newImg);
     }
-    // console.log(image);
     const onChangeHandler = e => {
         const newInfoData = { ...infoData, image };
         newInfoData[e.target.name] = e.target.value;
         setInfoData(newInfoData);
-        // console.log(e.target.value);
     }
     const handleSubmit = e => {
+        setLoading(true)
         const formData = new FormData()
         formData.append('file', image);
         formData.append('name', infoData.name);
@@ -32,12 +38,31 @@ const AddDoctor = () => {
         axios.post('http://localhost:5000/addADoctor', formData)
             .then(res => {
                 console.log(res.data);
+                e.target.reset();
+                setImage(null)
+                setLoading(false)
+                setOpenPopup({
+                    status: true,
+                    severity: 'success',
+                    message: 'Doctor added successfully'
+                })
+            })
+            .catch(err => {
+                setLoading(false)
+                setOpenPopup({
+                    status: true,
+                    severity: 'error',
+                    message: 'Failed to add doctor'
+                })
             })
     }
     return (
         <>
             <AdminSidebar />
             <DashboardDiv>
+                <Popup
+                    openPopup={openPopup}
+                    setOpenPopup={setOpenPopup} />
                 <Container>
                     <PageHeader title="Add Doctor" />
                 </Container>
@@ -76,6 +101,7 @@ const AddDoctor = () => {
                                 <div>{image?.name}</div>
                             </label>
                             <MuiButton type="submit" style={{ marginTop: 10 }}>Add</MuiButton>
+                            {loading && <Loader />}
                         </form>
                     </Paper>
                 </Container>

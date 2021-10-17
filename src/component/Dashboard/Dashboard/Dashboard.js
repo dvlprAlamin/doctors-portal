@@ -1,16 +1,11 @@
-import { Container, Paper, Typography, Table, MenuItem, TableBody, TableCell, TableHead, TableRow, TableContainer, Grid, Button, IconButton, CircularProgress } from '@mui/material';
+import { Container, Paper, Typography, Table, TableBody, TableCell, TableHead, TableRow, TableContainer, Grid } from '@mui/material';
 import React, { useState, useEffect } from 'react';
 import PickDate from '../../PickDate/PickDate';
 import DashboardDiv from '../../StyledComponent/DashboardDiv';
-import MuiButton from '../../StyledComponent/MuiButton';
 import AdminSidebar from '../Sidebar/AdminSidebar';
-import EditIcon from '@mui/icons-material/Edit';
 import { makeStyles } from '@mui/styles';
-import UserAvatar from '../Sidebar/UserAvatar';
 import axios from 'axios';
 import { useMyContext } from '../../../context/context';
-import MuiCheckbox from '../../StyledComponent/MuiCheckbox';
-import { Delete } from '@mui/icons-material';
 import AppointmentSingle from './AppointmentSingle';
 import Loader from '../../StyledComponent/Loader';
 import PageHeader from '../PageHeader/PageHeader';
@@ -33,25 +28,28 @@ const useStyle = makeStyles({
 const Dashboard = () => {
     const { gridItem } = useStyle();
     const { loggedInUser } = useMyContext();
-    // console.log(date);
     const [loading, setLoading] = useState(true)
     const [appointments, setAppointments] = useState([]);
     const [appointmentsByDate, setAppointmentsByDate] = useState([]);
-    // const [approved,setApproved] = useState(0);
     const getCount = name => {
         const amount = appointments.filter(item => item.status === name)
         return amount.length;
     }
-
-    useEffect(() => {
+    const getTodaysAppointment = () => {
+        const amount = appointments.filter(item => item.date === new Date().toDateString())
+        return amount.length;
+    }
+    const fetchData = () => {
         axios.get('https://secret-plains-52601.herokuapp.com/appointments')
             .then(res => {
                 setAppointments(res.data);
                 setAppointmentsByDate(res.data)
+                getCount('pending')
+                getCount('approved')
                 setLoading(false)
-                console.log(res.data);
             })
-    }, [])
+    }
+    useEffect(() => fetchData(), [])
 
     // console.log(appointments);
     const appointByDateHandler = (date) => {
@@ -80,7 +78,7 @@ const Dashboard = () => {
                         </Grid>
                         <Grid item xs={6} sm={6} md={3} lg={3}>
                             <Paper className={gridItem} style={{ background: '#0FCFEC' }}>
-                                <Typography variant="h3">19</Typography>
+                                <Typography variant="h3">{getTodaysAppointment()}</Typography>
                                 <Typography variant="body1">Today's <br /> Appointment</Typography>
                             </Paper>
                         </Grid>
@@ -125,8 +123,7 @@ const Dashboard = () => {
                                                     key={appointment._id}
                                                     index={i + 1}
                                                     appointment={appointment}
-                                                    setAppointmentsByDate={setAppointmentsByDate}
-                                                    getCount={getCount}
+                                                    fetchData={fetchData}
                                                 />)
                                         }
                                     </TableBody>}

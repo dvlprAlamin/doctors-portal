@@ -23,7 +23,7 @@ const style = {
     padding: 4,
 };
 
-const AppointmentModal = ({ open, setOpen, date, setOpenPopup }) => {
+const AppointmentModal = ({ open, setOpen, date, setOpenPopup, time }) => {
     const [gender, setGender] = useState('none');
     const [formData, setFormData] = useState({});
     const [loading, setLoading] = useState(false)
@@ -35,7 +35,7 @@ const AppointmentModal = ({ open, setOpen, date, setOpenPopup }) => {
             status: 'pending',
             action: 'not visited',
             date: new Date(date).toDateString(),
-            time: new Date(date).toTimeString()
+            time
         };
         newData[e.target.name] = e.target.value;
         setFormData(newData);
@@ -49,8 +49,19 @@ const AppointmentModal = ({ open, setOpen, date, setOpenPopup }) => {
                 if (res.data) {
                     setOpen(false)
                     setLoading(false);
-                    setOpenPopup(true)
+                    setOpenPopup({
+                        status: true,
+                        severity: 'success',
+                        message: 'Appointment success'
+                    })
                 }
+            })
+            .catch(err => {
+                setOpenPopup({
+                    status: true,
+                    severity: 'error',
+                    message: 'Appointment failed'
+                })
             })
     }
 

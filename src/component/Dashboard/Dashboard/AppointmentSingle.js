@@ -4,7 +4,7 @@ import MuiCheckbox from '../../StyledComponent/MuiCheckbox';
 import MuiButton from '../../StyledComponent/MuiButton';
 import { Delete } from '@mui/icons-material';
 import axios from 'axios';
-const AppointmentSingle = ({ index, appointment, setAppointmentsByDate, getCount }) => {
+const AppointmentSingle = ({ index, appointment, fetchData }) => {
     const { _id, name, phone, date, time, status } = appointment;
     const [statusValue, setStatusValue] = useState(status)
 
@@ -12,22 +12,19 @@ const AppointmentSingle = ({ index, appointment, setAppointmentsByDate, getCount
         setStatusValue(value);
         axios.patch(`http://localhost:5000/updateStatus/${id}`, { status: value })
             .then(res => {
-                console.log(res.data);
-                getCount('pending')
-                getCount('approved')
+                fetchData();
             })
     };
     const deleteAppointmentHandler = id => {
         axios.delete(`http://localhost:5000/deleteAppointment/${id}`)
             .then(res => {
-                console.log(res.data);
-                setAppointmentsByDate(prev => prev.filter(item => item._id !== id))
+                fetchData();
             })
     }
     return (
         <TableRow key={_id}>
             <TableCell>{index}</TableCell>
-            <TableCell>{date?.slice(4, 15)}</TableCell>
+            <TableCell>{date}</TableCell>
             <TableCell>{time?.slice(0, 8)}</TableCell>
             <TableCell>{name}</TableCell>
             <TableCell>{phone}</TableCell>
