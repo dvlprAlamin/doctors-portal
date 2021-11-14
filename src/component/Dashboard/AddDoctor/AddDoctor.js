@@ -35,7 +35,7 @@ const AddDoctor = () => {
         formData.append('email', infoData.email);
         formData.append('phone', infoData.phone);
         e.preventDefault();
-        axios.post('http://localhost:5000/addADoctor', formData)
+        axios.post('https://secret-plains-52601.herokuapp.com/addADoctor', formData)
             .then(res => {
                 console.log(res.data);
                 e.target.reset();

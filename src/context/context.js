@@ -1,6 +1,6 @@
 import { createContext, useContext, useEffect, useState } from "react";
 import firebaseInitialize from "../firebase/firebaseConfig";
-import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signInWithPopup, GoogleAuthProvider, onAuthStateChanged, signOut } from "firebase/auth";
+import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signInWithPopup, GoogleAuthProvider, onAuthStateChanged, signOut, updateProfile } from "firebase/auth";
 import axios from "axios";
 const userContext = createContext();
 
@@ -12,13 +12,12 @@ export const useMyContext = () => {
 firebaseInitialize();
 export const ContextProvider = ({ children }) => {
     const [date, setDate] = useState(new Date());
-
     const [loggedInUser, setLoggedInUser] = useState({});
     const [isDoctor, setIsDoctor] = useState(false);
     const [loading, setLoading] = useState(true);
     const email = loggedInUser?.email;
     useEffect(() => {
-        axios.post('http://localhost:5000/isDoctor', { email })
+        axios.post('https://secret-plains-52601.herokuapp.com/isDoctor', { email })
             .then(res => {
                 setIsDoctor(res.data);
             })
@@ -39,7 +38,10 @@ export const ContextProvider = ({ children }) => {
     const googleSignIn = () => {
         return signInWithPopup(auth, googleProvider)
     }
+    const setUserName = (name) => {
+        return updateProfile(auth.currentUser, { displayName: name })
 
+    }
     useEffect(() => {
         onAuthStateChanged(auth, (user) => {
             if (user) {
@@ -58,6 +60,7 @@ export const ContextProvider = ({ children }) => {
         login,
         googleSignIn,
         logOut,
+        setUserName,
         isDoctor,
         date,
         setDate

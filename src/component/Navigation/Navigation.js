@@ -173,11 +173,6 @@ const Navigation = () => {
             {
                 scrollNavItems.map(({ label, path }) =>
                     <ScrollLink key={label} className={link} to={path}
-                    // spy={true}
-                    // smooth={true}
-                    // exact='true'
-                    // offset={50}
-                    // duration={500}
                     >
                         <ListItem button
                             className={navItemDrawer}

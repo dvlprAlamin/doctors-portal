@@ -24,7 +24,7 @@ const doctorsData = [
 const OurDoctors = () => {
     const [doctors, setDoctors] = useState([]);
     useEffect(() => {
-        axios.get('http://localhost:5000/doctors')
+        axios.get('https://secret-plains-52601.herokuapp.com/doctors')
             .then(res => setDoctors(res.data))
     }, [])
     console.log(doctors);

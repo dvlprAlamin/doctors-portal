@@ -5,8 +5,10 @@ import axios from 'axios';
 const OurDoctorSIngle = ({ item }) => {
     const { name, phone, image } = item;
     // const deleteDoctor = () => {
-    //     axios.delete(`http://localhost:5000/deleteDoctors/${item._id}`)
+    //     axios.delete(`https://secret-plains-52601.herokuapp.com/deleteDoctors/${item._id}`)
     // }
+
+    
     return (
         <Grid item xs={12} sm={12} md={4} lg={4}>
             <Paper elevation={0} style={{ textAlign: 'center' }}>

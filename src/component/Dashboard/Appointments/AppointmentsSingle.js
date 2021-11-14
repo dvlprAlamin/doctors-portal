@@ -9,7 +9,7 @@ const AppointmentsSingle = ({ appointment, doctor }) => {
 
     const handleChange = e => {
         setActionInfo(e.target.value)
-        axios.patch(`http://localhost:5000/updateAction/${_id}`, { action: e.target.value })
+        axios.patch(`https://secret-plains-52601.herokuapp.com/updateAction/${_id}`, { action: e.target.value })
             .then(res => {
                 console.log(res.data);
             })

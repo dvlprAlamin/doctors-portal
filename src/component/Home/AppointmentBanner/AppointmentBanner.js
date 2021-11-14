@@ -11,22 +11,12 @@ const AppointmentBanner = () => {
         linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7))`,
             backgroundBlendMode: 'overlay',
             backgroundRepeat: 'no-repeat',
-            // minHeight: 350,
             marginTop: 100,
-            // '@media(max-width:900px)': {
-            //     padding: '50px 0',
-            // }
         },
         doctor: {
-            // position: 'absolute',
-            // bottom: 0,
-            // width: '90%',
             '@media(max-width:900px)': {
                 maxHeight: 450,
                 width: 'auto',
-                // left: 0,
-                // right: 0,
-                // margin: '0 auto'
             },
             width: '100%',
             marginTop: -100

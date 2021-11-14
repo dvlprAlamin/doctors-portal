@@ -10,13 +10,13 @@ const AppointmentSingle = ({ index, appointment, fetchData }) => {
 
     const handleStatusChange = (id, value) => {
         setStatusValue(value);
-        axios.patch(`http://localhost:5000/updateStatus/${id}`, { status: value })
+        axios.patch(`https://secret-plains-52601.herokuapp.com/updateStatus/${id}`, { status: value })
             .then(res => {
                 fetchData();
             })
     };
     const deleteAppointmentHandler = id => {
-        axios.delete(`http://localhost:5000/deleteAppointment/${id}`)
+        axios.delete(`https://secret-plains-52601.herokuapp.com/deleteAppointment/${id}`)
             .then(res => {
                 fetchData();
             })

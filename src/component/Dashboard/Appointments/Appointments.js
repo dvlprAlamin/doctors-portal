@@ -40,7 +40,7 @@ const Appointment = () => {
     const [loading, setLoading] = useState(true)
     // console.log(appointments);
     useEffect(() => {
-        axios.get('http://localhost:5000/approvedAppointments')
+        axios.get('https://secret-plains-52601.herokuapp.com/approvedAppointments')
             .then(res => {
                 setAppointments(res.data);
                 setAppointmentsByDate(res.data)
@@ -53,7 +53,7 @@ const Appointment = () => {
     const appointmentsByDateHandler = date => {
         const dataObject = { date: new Date(date).toDateString() }
         console.log(dataObject);
-        axios.post('http://localhost:5000/appointmentsByDate', dataObject)
+        axios.post('https://secret-plains-52601.herokuapp.com/appointmentsByDate', dataObject)
             .then(res => {
                 setAppointmentsByDate(res.data);
             })
